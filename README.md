@@ -3,5 +3,5 @@
 Group members
 Yoonsung Ahn
 Kieran Harrison
-Mike Beryshav
+Mike Baryshev
 Ivo Marjanovic
