@@ -30,13 +30,14 @@ public class Flower {
 	 * @param hasLeaves
 	 * @param className
 	 */
-	public Flower(int xpos, int ypos, int stemHeight, int numberOfPetals, int coreSize, boolean hasRoots, boolean hasLeaves, String className) {
+	public Flower(int xpos, int ypos, int stemHeight, int numberOfPetals, int coreSize, int petalSize, boolean hasRoots, boolean hasLeaves, String className) {
 		super();
 		this.xpos = xpos;
 		this.ypos = ypos;
 		this.stemHeight = stemHeight;
 		this.numberOfPetals = numberOfPetals;
 		this.coreSize = coreSize;
+		this.petalSize = petalSize;
 		this.hasRoots = hasRoots;
 		this.hasLeaves = hasLeaves;
 		this.className = className;
@@ -132,7 +133,7 @@ public class Flower {
 		this.className = className;
 	}
 
-	public void getClassName() {
+	public String getClassName() {
 		return this.className;
 	}
 	
