@@ -5,9 +5,9 @@ public class Flower {
 	private int ypos;	//Bottom point
 	
 	private int stemHeight;
-	private int numberOfPaddles;
+	private int numberOfPetals;
 	private int coreSize;
-	private int paddleSize;
+	private int petalSize;
 	
 	private boolean hasRoots;	//For imports?
 	private boolean hasLeaves;
@@ -20,27 +20,26 @@ public class Flower {
 	/** Generate a nice flower given all the possible parameters.
 	 * @param xpos - Leftmost point of the rectangle that surrounds the flower
 	 * @param ypos - The lowest point of the rectangle that surrounds the flower
-	 * @param stemHeight - The height of the stem, not counting the head and paddles (?)
-	 * @param numberOfPaddles
-	 * @param coreSize - The size of the core of the head to which the paddles are connected
-	 * @param paddleSize - The radius within which the paddles are (padlleSize + coreSize = Head size)
+	 * @param stemHeight - The height of the stem, not counting the head and petals
+	 * @param numberOfPetals
+	 * @param coreSize - The size of the core of the head to which the petals are connected
+	 * @param petalSize - The radius within which the petals are (petalSize + coreSize = Head size)
 	 * @param hasRoots
 	 * @param hasLeaves
 	 */
-	public Flower(int xpos, int ypos, int stemHeight, int numberOfPaddles,
-			int coreSize, boolean hasRoots, boolean hasLeaves) {
+	public Flower(int xpos, int ypos, int stemHeight, int numberOfPetals, int coreSize, boolean hasRoots, boolean hasLeaves) {
 		super();
 		this.xpos = xpos;
 		this.ypos = ypos;
 		this.stemHeight = stemHeight;
-		this.numberOfPaddles = numberOfPaddles;
+		this.numberOfPetals = numberOfPetals;
 		this.coreSize = coreSize;
 		this.hasRoots = hasRoots;
 		this.hasLeaves = hasLeaves;
 	}
 
 	
-	//TODO: A constructor with less arguments? With which ones?
+	//TODO: A constructor with fewer arguments? With which ones?
 	
 	
 	//Getters and setters
@@ -76,13 +75,13 @@ public class Flower {
 	}
 
 
-	public int getNumberOfPaddles() {
-		return numberOfPaddles;
+	public int getNumberOfPetals() {
+		return numberOfPetals;
 	}
 
 
-	public void setNumberOfPaddles(int numberOfPaddles) {
-		this.numberOfPaddles = numberOfPaddles;
+	public void setNumberOfPetals(int numberOfPetals) {
+		this.numberOfPetals = numberOfPetals;
 	}
 
 
@@ -96,13 +95,13 @@ public class Flower {
 	}
 
 
-	public int getPaddleSize() {
-		return paddleSize;
+	public int getPetalSize() {
+		return petalSize;
 	}
 
 
-	public void setPaddleSize(int paddleSize) {
-		this.paddleSize = paddleSize;
+	public void setPetalSize(int petalSize) {
+		this.petalSize = petalSize;
 	}
 
 
@@ -124,9 +123,6 @@ public class Flower {
 	public void setHasLeaves(boolean hasLeaves) {
 		this.hasLeaves = hasLeaves;
 	}
-	
-	
-	
-	
+
 	
 }
