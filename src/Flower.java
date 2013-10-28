@@ -132,7 +132,7 @@ public class Flower {
 		this.className = className;
 	}
 
-	public void getClassName() {
+	public String getClassName() {
 		return this.className;
 	}
 	
