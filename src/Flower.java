@@ -11,6 +11,8 @@ public class Flower {
 	
 	private boolean hasRoots;	//For imports?
 	private boolean hasLeaves;
+
+	private String className;
 	
 	
 	//TODO: For the future extensions:
@@ -26,8 +28,9 @@ public class Flower {
 	 * @param petalSize - The radius within which the petals are (petalSize + coreSize = Head size)
 	 * @param hasRoots
 	 * @param hasLeaves
+	 * @param className
 	 */
-	public Flower(int xpos, int ypos, int stemHeight, int numberOfPetals, int coreSize, boolean hasRoots, boolean hasLeaves) {
+	public Flower(int xpos, int ypos, int stemHeight, int numberOfPetals, int coreSize, boolean hasRoots, boolean hasLeaves, String className) {
 		super();
 		this.xpos = xpos;
 		this.ypos = ypos;
@@ -36,6 +39,7 @@ public class Flower {
 		this.coreSize = coreSize;
 		this.hasRoots = hasRoots;
 		this.hasLeaves = hasLeaves;
+		this.className = className;
 	}
 
 	
@@ -124,5 +128,12 @@ public class Flower {
 		this.hasLeaves = hasLeaves;
 	}
 
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public void getClassName() {
+		return this.className;
+	}
 	
 }
