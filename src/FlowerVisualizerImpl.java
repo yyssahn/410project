@@ -3,7 +3,9 @@
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Label;
+import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
@@ -21,6 +23,10 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		mainWindowFrame.setBackground(new Color(236, 240, 241));
 		mainWindowFrame.add(new Label("Hallo"));
 		mainWindowFrame.setLayout(new FlowLayout());
+		
+		mainWindowFrame.setTitle("It is Robotanism! Your code is filled with flowers~");
+		Image myIcon = Toolkit.getDefaultToolkit().getImage("assets/icon0.png");
+		mainWindowFrame.setIconImage(myIcon);
 		
 		//Debug
 		for (Flower currentFlower : flowerList)

@@ -66,26 +66,23 @@ public class FlowerComponent extends Canvas{
 			x[0] = xzero;
 			y[0] = yzero;
 			for (int k = 0; k < 2 * nImports; k = k + 2) {
-				double alpha = Math.PI / 2 / nImports + k / 2 * Math.PI
-						/ nImports;
-				x[k + 1] = xzero
-						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) * Math
-								.cos(alpha));
-				y[k + 1] = yzero
-						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) * Math
-								.sin(alpha));
+				double alpha = Math.PI / 2 / nImports + k / 2 * Math.PI/ nImports;
+				x[k + 1] = xzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) 
+								* Math.cos(alpha));
+				y[k + 1] = yzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) 
+								* Math.sin(alpha));
 			}
 			for (int k = 2; k < 2 * nImports; k = k + 2) {
 				double alpha = k / 2 * Math.PI / nImports;
-				x[k] = xzero
-						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 * Math
-								.cos(alpha));
-				y[k] = yzero
-						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 * Math
-								.sin(alpha));
+				x[k] = xzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 
+						* Math.cos(alpha));
+				y[k] = yzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 
+						* Math.sin(alpha));
 			}
 			g.fillPolygon(x, y, 2 * nImports);
 		}
+		
+		//TODO: Deal with long Strings?
 		//Printing the class name
 		g.setColor(Color.DARK_GRAY);
 		Font f = new Font("Monospaced", Font.BOLD, 12);
