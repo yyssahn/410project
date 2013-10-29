@@ -1,3 +1,6 @@
+
+
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Label;
 import java.awt.event.WindowAdapter;
@@ -15,6 +18,7 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		Frame mainWindowFrame = new Frame();
 		mainWindowFrame.setSize(640, 480);
 		mainWindowFrame.add(new Label("Hallo"));
+		mainWindowFrame.setLayout(new FlowLayout());
 		
 		//Debug
 		//Flower myFirstFlower = new Flower(0, 400, 200, 5, 100, 50, true, false, "Blah");

@@ -1,4 +1,5 @@
 
+
 public class Flower {
 	
 	private int xpos;	//Leftmost point

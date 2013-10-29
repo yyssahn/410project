@@ -1,3 +1,5 @@
+
+
 import java.util.ArrayList;
 
 // A class that provides methods to run the visualizer
