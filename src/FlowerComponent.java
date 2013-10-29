@@ -13,7 +13,7 @@ public class FlowerComponent extends Canvas{
 	private Flower flowerData;
 	private int totalWidth;
 	private int totalHeight;
-	private final int DEFAULTROOTSIZE = 40;
+	private final int DEFAULTROOTSIZE = 60;
 	private int rootSize;
 
 
@@ -53,12 +53,39 @@ public class FlowerComponent extends Canvas{
 
 		//Stem
 		g.setColor(new Color(39, 174, 96));
-		g.drawArc(totalWidth/2, totalWidth, 40, flowerData.getStemHeight(), 270, 180);
+		g.drawArc(totalWidth/2-20, totalWidth, 40, flowerData.getStemHeight(), 270, 170);
 
 		//Roots
-		g.setColor(new Color(241, 196, 15));
-		g.drawRect(totalWidth/2-40, totalHeight-rootSize, 80, rootSize-1);
-		
+		if (flowerData.isHasRoots()) {
+			g.setColor(new Color(241, 196, 15));
+			int nImports = flowerData.getnOfRoots();
+			int[] x = new int[2 * nImports];
+			int[] y = new int[2 * nImports];
+			int xzero = totalWidth / 2;
+			int yzero = totalHeight - rootSize - 3;
+			x[0] = xzero;
+			y[0] = yzero;
+			for (int k = 0; k < 2 * nImports; k = k + 2) {
+				double alpha = Math.PI / 2 / nImports + k / 2 * Math.PI
+						/ nImports;
+				x[k + 1] = xzero
+						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) * Math
+								.cos(alpha));
+				y[k + 1] = yzero
+						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) * Math
+								.sin(alpha));
+			}
+			for (int k = 2; k < 2 * nImports; k = k + 2) {
+				double alpha = k / 2 * Math.PI / nImports;
+				x[k] = xzero
+						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 * Math
+								.cos(alpha));
+				y[k] = yzero
+						+ (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 * Math
+								.sin(alpha));
+			}
+			g.fillPolygon(x, y, 2 * nImports);
+		}
 		//Printing the class name
 		g.setColor(Color.DARK_GRAY);
 		Font f = new Font("Monospaced", Font.BOLD, 12);

@@ -13,6 +13,20 @@ public class Flower {
 	private boolean hasRoots;	//For imports?
 	private boolean hasLeaves;
 
+	//Yay, new functions!
+	private int nOfRoots = 6;
+	
+	public int getnOfRoots() {
+		return nOfRoots;
+	}
+
+
+	public void setnOfRoots(int nOfRoots) {
+		this.nOfRoots = nOfRoots;
+	}
+
+	
+	
 	private String className;
 	
 	
