@@ -18,7 +18,6 @@ public class test {
 
 		FlowerVisualizer myFV = new FlowerVisualizerImpl();
 		myFV.drawFlowers(toPass);
-
 	}
 
 }
