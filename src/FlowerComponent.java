@@ -1,7 +1,11 @@
 
 
+import java.awt.BasicStroke;
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 
 @SuppressWarnings("serial")
@@ -32,17 +36,34 @@ public class FlowerComponent extends Canvas{
 		}
 
 		this.setSize(totalWidth, totalHeight);
-
+		
+		//Need to change the size of a stroke
+		Graphics2D g2d = ((Graphics2D) g);
+		g2d.setStroke(new BasicStroke(5));
+		
 		//Head
-		g.drawOval(0, 0, totalWidth-1, totalWidth-1);
-		g.drawOval(flowerData.getPetalSize()/2, flowerData.getPetalSize()/2, 
+			//Petals
+				g.setColor(new Color(241, 196, 15));
+				g.fillOval(0, 0, totalWidth-1, totalWidth-1);
+			//Core
+		g.setColor(new Color(231, 76, 60));
+		g.fillOval(flowerData.getPetalSize()/2, flowerData.getPetalSize()/2, 
 				flowerData.getCoreSize(),flowerData.getCoreSize());
+			
 
 		//Stem
+		g.setColor(new Color(39, 174, 96));
 		g.drawArc(totalWidth/2, totalWidth, 40, flowerData.getStemHeight(), 270, 180);
 
 		//Roots
-		g.draw3DRect(totalWidth/2-40, totalHeight-rootSize, 80, rootSize-1, false);
+		g.setColor(new Color(241, 196, 15));
+		g.drawRect(totalWidth/2-40, totalHeight-rootSize, 80, rootSize-1);
+		
+		//Printing the class name
+		g.setColor(Color.DARK_GRAY);
+		Font f = new Font("Monospaced", Font.BOLD, 12);
+		g.setFont(f);
+		g.drawString(flowerData.getClassName(), 0, 10);
 	}
 
 }

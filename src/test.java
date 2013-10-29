@@ -10,7 +10,7 @@ public class test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Flower myFirstFlower = new Flower(0, 400, 200, 5, 100, 50, true, false, "Blah");
+		Flower myFirstFlower = new Flower(0, 400, 200, 5, 100, 50, true, false, "Flower.java");
 		ArrayList<Flower> toPass = new ArrayList<Flower>();
 		toPass.add(myFirstFlower);
 		for (int i = 0; i< 10; i++)
