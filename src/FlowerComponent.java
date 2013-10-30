@@ -21,8 +21,9 @@ public class FlowerComponent extends Canvas{
 		if (flowerData == null)
 			return;
 		this.flowerData = flowerData;
-		totalWidth = flowerData.getCoreSize() + flowerData.getPetalSize();
-		rootSize = (flowerData.isHasRoots() ? 1 : 0) * DEFAULTROOTSIZE;
+		int totalRadius = flowerData.getCoreRadius() + flowerData.getPetalRadius();
+		totalWidth = 2*totalRadius;
+		rootSize = (flowerData.hasRoots() ? 1 : 0) * DEFAULTROOTSIZE;
 		totalHeight = totalWidth + flowerData.getStemHeight() + rootSize;
 		this.setSize(totalWidth, totalHeight);
 	}
@@ -46,7 +47,7 @@ public class FlowerComponent extends Canvas{
 		g.drawArc(totalWidth/2-20, totalWidth/2, 40, totalWidth/2+flowerData.getStemHeight(), 270, 170);
 
 		//Leaves
-		if (flowerData.isHasLeaves())
+		if (flowerData.hasLeaves())
 		{
 			g.fillArc(totalWidth/2+16, (int) (totalWidth+flowerData.getStemHeight()/10), 80, 40, 45, 180);
 			g.fillArc(totalWidth/2+16-73, (int) (totalWidth+flowerData.getStemHeight()/4), 80, 40, -45, 180);
@@ -72,7 +73,7 @@ public class FlowerComponent extends Canvas{
 					
 					for (int k = 0; k < 2*n; k++)
 					{
-						int w = (k%2 != 0) ? totalWidth/2 : flowerData.getCoreSize()/2;
+						int w = (k%2 != 0) ? totalWidth/2 : flowerData.getCoreRadius();
 						x[k] += w*Math.cos(Math.PI/2 + Math.PI/n*k);
 						y[k] += w*Math.sin(Math.PI/2 + Math.PI/n*k);
 						
@@ -82,16 +83,16 @@ public class FlowerComponent extends Canvas{
 				
 			//Core
 		g.setColor(new Color(231, 76, 60));
-		g.fillOval(flowerData.getPetalSize()/2, flowerData.getPetalSize()/2, 
-				flowerData.getCoreSize(),flowerData.getCoreSize());
+		g.fillOval(flowerData.getPetalRadius(), flowerData.getPetalRadius(), 
+				flowerData.getCoreRadius()*2,flowerData.getCoreRadius()*2);
 			
 		//Makes a hat to the flower - yay!
 		//g.fillArc(0, 0, 100, 50, 45, 180);
 		
 		//Roots
-		if (flowerData.isHasRoots()) {
+		if (flowerData.hasRoots()) {
 			g.setColor(new Color(241, 196, 15));
-			int nImports = flowerData.getnOfRoots();
+			int nImports = flowerData.getNumberOfRoots();
 			int[] x = new int[2 * nImports];
 			int[] y = new int[2 * nImports];
 			int xzero = totalWidth / 2;

@@ -7,25 +7,11 @@ public class Flower {
 	
 	private int stemHeight;
 	private int numberOfPetals;
-	private int coreSize;
-	private int petalSize;
+	private int coreRadius;
+	private int petalRadius;
 	
-	private boolean hasRoots;	//For imports?
 	private boolean hasLeaves;
-
-	//Yay, new functions!
-	private int nOfRoots = 6;
-	
-	public int getnOfRoots() {
-		return nOfRoots;
-	}
-
-
-	public void setnOfRoots(int nOfRoots) {
-		this.nOfRoots = nOfRoots;
-	}
-
-	
+	private int numberOfRoots; //= 6;
 	
 	private String className;
 	
@@ -40,20 +26,21 @@ public class Flower {
 	 * @param stemHeight - The height of the stem, not counting the head and petals
 	 * @param numberOfPetals
 	 * @param coreSize - The size of the core of the head to which the petals are connected
-	 * @param petalSize - The radius within which the petals are (petalSize + coreSize = Head size)
-	 * @param hasRoots
+	 * @param petalRadius - The radius within which the petals are (petalSize + coreSize = Head size)
+	 * @param numberOfRoots
 	 * @param hasLeaves
 	 * @param className
 	 */
-	public Flower(int xpos, int ypos, int stemHeight, int numberOfPetals, int coreSize, int petalSize, boolean hasRoots, boolean hasLeaves, String className) {
+	public Flower(int xpos, int ypos, int stemHeight, int numberOfPetals, int coreSize, int petalRadius, 
+			int numberOfRoots, boolean hasLeaves, String className) {
 		super();
 		this.xpos = xpos;
 		this.ypos = ypos;
 		this.stemHeight = stemHeight;
 		this.numberOfPetals = numberOfPetals;
-		this.coreSize = coreSize;
-		this.petalSize = petalSize;
-		this.hasRoots = hasRoots;
+		this.coreRadius = coreSize;
+		this.petalRadius = petalRadius;
+		this.numberOfRoots = numberOfRoots;
 		this.hasLeaves = hasLeaves;
 		this.className = className;
 	}
@@ -105,37 +92,31 @@ public class Flower {
 	}
 
 
-	public int getCoreSize() {
-		return coreSize;
+	public int getCoreRadius() {
+		return coreRadius;
 	}
 
 
-	public void setCoreSize(int coreSize) {
-		this.coreSize = coreSize;
+	public void setCoreRadius(int coreRadius) {
+		this.coreRadius = coreRadius;
 	}
 
 
-	public int getPetalSize() {
-		return petalSize;
+	public int getPetalRadius() {
+		return petalRadius;
 	}
 
 
-	public void setPetalSize(int petalSize) {
-		this.petalSize = petalSize;
+	public void setPetalRadius(int petalRadius) {
+		this.petalRadius = petalRadius;
 	}
 
 
-	public boolean isHasRoots() {
-		return hasRoots;
+	public boolean hasRoots() {
+		return numberOfRoots > 0;
 	}
 
-
-	public void setHasRoots(boolean hasRoots) {
-		this.hasRoots = hasRoots;
-	}
-
-
-	public boolean isHasLeaves() {
+	public boolean hasLeaves() {
 		return hasLeaves;
 	}
 
@@ -150,6 +131,16 @@ public class Flower {
 
 	public String getClassName() {
 		return this.className;
+	}
+	
+
+	public int getNumberOfRoots() {
+		return numberOfRoots;
+	}
+
+
+	public void setnumberOfRoots(int numberOfRoots) {
+		this.numberOfRoots = numberOfRoots;
 	}
 	
 }
