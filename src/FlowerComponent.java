@@ -39,22 +39,55 @@ public class FlowerComponent extends Canvas{
 		
 		//Need to change the size of a stroke
 		Graphics2D g2d = ((Graphics2D) g);
-		g2d.setStroke(new BasicStroke(5));
+		g2d.setStroke(new BasicStroke(7));
+		
+		//Stem
+		g.setColor(new Color(39, 174, 96));
+		g.drawArc(totalWidth/2-20, totalWidth/2, 40, totalWidth/2+flowerData.getStemHeight(), 270, 170);
+
+		//Leaves
+		if (flowerData.isHasLeaves())
+		{
+			g.fillArc(totalWidth/2+16, (int) (totalWidth+flowerData.getStemHeight()/10), 80, 40, 45, 180);
+			g.fillArc(totalWidth/2+16-73, (int) (totalWidth+flowerData.getStemHeight()/4), 80, 40, -45, 180);
+		}
 		
 		//Head
 			//Petals
 				g.setColor(new Color(241, 196, 15));
-				g.fillOval(0, 0, totalWidth-1, totalWidth-1);
+				if (flowerData.getNumberOfPetals() == 1)
+				{
+					g.fillOval(0, 0, totalWidth-1, totalWidth-1);
+				}
+				else
+				{
+					int n = flowerData.getNumberOfPetals();
+					int[] x = new int[2*n+1];
+					int[] y = new int[2*n+1];
+					for (int k = 0; k < x.length; k++)
+					{
+						x[k] = totalWidth / 2;
+						y[k] = totalWidth / 2;
+					}
+					
+					for (int k = 0; k < 2*n; k++)
+					{
+						int w = (k%2 != 0) ? totalWidth/2 : flowerData.getCoreSize()/2;
+						x[k] += w*Math.cos(Math.PI/2 + Math.PI/n*k);
+						y[k] += w*Math.sin(Math.PI/2 + Math.PI/n*k);
+						
+					}
+					g.fillPolygon(x, y, 2 * n);					
+				}
+				
 			//Core
 		g.setColor(new Color(231, 76, 60));
 		g.fillOval(flowerData.getPetalSize()/2, flowerData.getPetalSize()/2, 
 				flowerData.getCoreSize(),flowerData.getCoreSize());
 			
-
-		//Stem
-		g.setColor(new Color(39, 174, 96));
-		g.drawArc(totalWidth/2-20, totalWidth, 40, flowerData.getStemHeight(), 270, 170);
-
+		//Makes a hat to the flower - yay!
+		//g.fillArc(0, 0, 100, 50, 45, 180);
+		
 		//Roots
 		if (flowerData.isHasRoots()) {
 			g.setColor(new Color(241, 196, 15));
