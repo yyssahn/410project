@@ -6,11 +6,13 @@ public class ClassObject {
 	private ArrayList<String> imports;
 	private ArrayList<MethodObject> methods;
 	private int numberOfLines;
+	private String className;
 	
-	public ClassObject(ArrayList<String> imports, ArrayList<MethodObject> methods, int numberOfLines){
+	public ClassObject(ArrayList<String> imports, ArrayList<MethodObject> methods, int numberOfLines, String className){
 		this.imports = imports;
 		this.methods = methods;
 		this.numberOfLines = numberOfLines;
+		this.setClassName(className);
 	}
 	
 	public ArrayList<String> getImports() {
@@ -23,6 +25,7 @@ public class ClassObject {
 	public ArrayList<MethodObject> getMethods() {
 		return methods;
 	}
+	
 	public void setMethods(ArrayList<MethodObject> methods) {
 		this.methods = methods;
 	}
@@ -32,6 +35,14 @@ public class ClassObject {
 	}
 	public void setNumberOfLines(int numberOfLines) {
 		this.numberOfLines = numberOfLines;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
 	}
 	
 	

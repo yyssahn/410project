@@ -13,8 +13,7 @@ public interface FlowerVisualizer {
 	 * @param height - height of the window where the flowers would be made.
 	 * @param relationList - a list of relationships between the flowers
 	 */
-	public void drawFlowers(ArrayList<Flower> flowerList, int width, int height, 
-			ArrayList<FlowerRelation> relationList);
+	public void drawFlowers(ArrayList<Flower> flowerList, int width, int height, ArrayList<FlowerRelation> relationList);
 	
 	/**
 	 * An entry point to the Visualizer which draws the flowers on the window of specified size. 

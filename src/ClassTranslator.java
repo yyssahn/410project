@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 
 public interface ClassTranslator {
 	
-	public void translateClass(ClassObject classObject);
+	public void translateClass(ArrayList<ClassObject> classes);
 
 }
