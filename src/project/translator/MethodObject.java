@@ -1,3 +1,4 @@
+package project.translator;
 
 
 public class MethodObject {

@@ -1,4 +1,10 @@
+package project.translator;
 import java.util.ArrayList;
+
+import project.flowerVisualizer.Flower;
+import project.flowerVisualizer.FlowerRelation;
+import project.flowerVisualizer.FlowerVisualizer;
+import project.flowerVisualizer.FlowerVisualizerImpl;
 
 public class ClassTranslatorImpl implements ClassTranslator{
 

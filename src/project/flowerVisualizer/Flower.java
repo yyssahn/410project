@@ -1,3 +1,4 @@
+package project.flowerVisualizer;
 
 
 public class Flower {

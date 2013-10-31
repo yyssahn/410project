@@ -1,5 +1,11 @@
+package project.test;
 import java.awt.Frame;
 import java.util.ArrayList;
+
+import project.translator.ClassObject;
+import project.translator.ClassTranslator;
+import project.translator.ClassTranslatorImpl;
+import project.translator.MethodObject;
 
 
 public class TranslatorTest {

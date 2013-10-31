@@ -1,7 +1,12 @@
+package project.test;
 
 
 import java.awt.Frame;
 import java.util.ArrayList;
+
+import project.flowerVisualizer.Flower;
+import project.flowerVisualizer.FlowerVisualizer;
+import project.flowerVisualizer.FlowerVisualizerImpl;
 
 
 public class test {

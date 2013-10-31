@@ -1,3 +1,4 @@
+package project.flowerVisualizer;
 
 //More of a struct
 public class FlowerRelation {

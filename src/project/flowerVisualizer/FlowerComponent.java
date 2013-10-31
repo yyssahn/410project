@@ -1,3 +1,4 @@
+package project.flowerVisualizer;
 
 
 import java.awt.BasicStroke;
