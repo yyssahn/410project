@@ -1,4 +1,4 @@
-package project.translator;
+package project.parser;
 
 public class MethodObject {
 

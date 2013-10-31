@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.translator.MethodObject;
 
 import japa.parser.JavaParser;
 import japa.parser.ast.CompilationUnit;
@@ -34,6 +33,8 @@ public class Parser {
             in.close();
         }
 
+        String className = "Dummy name"; // Doesn't seem to be a method for getting class name.  Have to implement.
+        System.out.println(className);
         List<ImportDeclaration> declarationList = cu.getImports();
         String importName;
         for(int i=0; i<declarationList.size(); i++){
@@ -46,7 +47,7 @@ public class Parser {
         
         int numberOfLines = cu.getEndLine();
         
-        classObject = new ClassObject(imports, methods, numberOfLines);
+        classObject = new ClassObject(imports, methods, numberOfLines, className);
         
         //Testing
         System.out.println("Lines in class: " + classObject.getNumberOfLines() + "\n");

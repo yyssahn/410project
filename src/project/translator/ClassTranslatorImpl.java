@@ -6,7 +6,7 @@ import project.parser.ClassObject;
 public class ClassTranslatorImpl implements ClassTranslator{
 
 	@Override
-	public void translateClass(ClassObject classObject) {
+	public void translateClass(ArrayList<ClassObject> classObject) {
 //		drawFlowers(ArrayList<Flower> flowerList, int width, int height);
 	}
 
