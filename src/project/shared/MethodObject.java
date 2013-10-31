@@ -1,4 +1,4 @@
-package project.translator;
+package project.shared;
 
 public class MethodObject {
 
@@ -8,6 +8,10 @@ public class MethodObject {
 	public MethodObject(String name, int numberOfLines){
 		this.name = name;
 		this.numberOfLines = numberOfLines;
+	}
+	
+	public MethodObject(){
+		
 	}
 	
 	public void setName(String name){

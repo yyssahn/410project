@@ -1,6 +1,6 @@
 package project.translator;
 
-import project.parser.ClassObject;
+import project.shared.ClassObject;
 
 public interface ClassTranslator {
 	

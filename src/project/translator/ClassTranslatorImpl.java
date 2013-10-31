@@ -1,7 +1,7 @@
 package project.translator;
 import java.util.ArrayList;
 
-import project.parser.ClassObject;
+import project.shared.ClassObject;
 
 public class ClassTranslatorImpl implements ClassTranslator{
 
