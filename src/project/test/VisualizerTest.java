@@ -9,7 +9,7 @@ import project.flowerVisualizer.FlowerVisualizer;
 import project.flowerVisualizer.FlowerVisualizerImpl;
 
 
-public class test {
+public class VisualizerTest {
 
 	public static Frame one;
 	public static void main(String[] args) {

@@ -4,7 +4,8 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import project.translator.ClassTranslator;
+import project.translator.ClassTranslatorImpl;
 import japa.parser.JavaParser;
 import japa.parser.ast.CompilationUnit;
 import japa.parser.ast.ImportDeclaration;
@@ -15,11 +16,14 @@ import japa.parser.ast.visitor.VoidVisitorAdapter;
 public class Parser {
 	private static ArrayList<MethodObject> methods;
 	private static ArrayList<String> imports;
+	private static ArrayList<ClassObject> classes;
 	private static ClassObject classObject;
 
 	public static void main(String[] args) throws Exception {
 		methods = new ArrayList<MethodObject>();
 		imports = new ArrayList<String>();
+		classes = new ArrayList<ClassObject>();
+
 		//Parserception 
 		String file = "code/TreeFinder/server/TreeParser.java";
         // creates an input stream for the file to be parsed
@@ -64,6 +68,11 @@ public class Parser {
         	System.out.println("   Method name: " + testMethods.get(i).getName());
         	System.out.println("   Method size: " + testMethods.get(i).getNumberOfLines() + " lines \n");
         }
+        
+        classes.add(classObject);
+        
+        ClassTranslator test = new ClassTranslatorImpl();
+		test.translateClass(classes);
     }
 
     /**
