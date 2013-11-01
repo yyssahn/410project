@@ -15,6 +15,7 @@ public class TranslatorTest {
 	public static void main(String[] args) {
 		
 		ArrayList<ClassObject> classes = new ArrayList<ClassObject>();
+		
 		for(int i = 0; i < 2; i ++){
 			ArrayList<String> imports = new ArrayList<String>();
 			imports.add("test1");
