@@ -22,8 +22,9 @@ public class TranslatorTest {
 			imports.add("test2");
 			ArrayList<MethodObject> methods = new ArrayList<MethodObject>();
 				methods.add(new MethodObject("test", 232));
+				methods.add(new MethodObject("anothertest", 343));
 				methods.add(new MethodObject("fake", 2));
-			classes.add(new ClassObject(imports, methods, 14, "test.java"));
+			classes.add(new ClassObject(imports, methods, 100, "test.java"));
 		}
 		
 		ClassTranslator test = new ClassTranslatorImpl();
