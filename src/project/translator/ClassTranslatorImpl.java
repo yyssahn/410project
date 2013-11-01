@@ -6,8 +6,8 @@ import project.flowerVisualizer.*;
 
 public class ClassTranslatorImpl implements ClassTranslator{
 	
-	final int MAXSTEMHEIGHT = 100;
-	final int MINSTEMHEIGHT = 20;
+	final int MAXSTEMHEIGHT = 375;
+	final int MINSTEMHEIGHT = 50;
 	
 	@Override
 	public void translateClass(ArrayList<ClassObject> classes) {
@@ -20,12 +20,12 @@ public class ClassTranslatorImpl implements ClassTranslator{
 			}
 		}
 		
-		int stemHeightFactor = Math.max(MINSTEMHEIGHT, MAXSTEMHEIGHT / topStemHeight);
+		int stemHeightFactor = MAXSTEMHEIGHT / topStemHeight;
 		
 		for(int i = 0; i < classes.size(); i++){
 			int xpos = 0;
 			int ypos = 0;
-			int stemHeight = classes.get(i).getNumberOfLines() * stemHeightFactor;
+			int stemHeight = Math.max(MINSTEMHEIGHT, classes.get(i).getNumberOfLines() * stemHeightFactor);
 			int numberOfPetals = classes.get(i).getMethods().size();
 			int coreSize = 50;
 			int petalRadius = 100;
