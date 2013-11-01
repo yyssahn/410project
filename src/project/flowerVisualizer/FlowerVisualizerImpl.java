@@ -41,6 +41,7 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		
 		//Need this to close the windows and the program
 		mainWindowFrame.addWindowListener(new WindowAdapter(){
+			@Override
 			public void windowClosing(WindowEvent we)
 			{
 				System.exit(0);

@@ -30,6 +30,7 @@ public class FlowerComponent extends Canvas{
 	}
 
 	//Do not look here, I am a bit ashamed =(
+	@Override
 	public void paint(Graphics g){
 		if (flowerData == null)
 		{	
@@ -50,8 +51,8 @@ public class FlowerComponent extends Canvas{
 		//Leaves
 		if (flowerData.hasLeaves())
 		{
-			g.fillArc(totalWidth/2+16, (int) (totalWidth+flowerData.getStemHeight()/10), 80, 40, 45, 180);
-			g.fillArc(totalWidth/2+16-73, (int) (totalWidth+flowerData.getStemHeight()/4), 80, 40, -45, 180);
+			g.fillArc(totalWidth/2+16, totalWidth+flowerData.getStemHeight()/10, 80, 40, 45, 180);
+			g.fillArc(totalWidth/2+16-73, totalWidth+flowerData.getStemHeight()/4, 80, 40, -45, 180);
 		}
 		
 		//Head
