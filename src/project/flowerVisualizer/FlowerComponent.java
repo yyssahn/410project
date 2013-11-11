@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 
 
 @SuppressWarnings("serial")
@@ -16,7 +17,7 @@ public class FlowerComponent extends Canvas{
 	private int totalHeight;
 	private final int DEFAULTROOTSIZE = 60;
 	private int rootSize;
-	public int x, y;
+	public Point connectionCenter = new Point();
 
 
 	public FlowerComponent(Flower flowerData) {
@@ -35,6 +36,9 @@ public class FlowerComponent extends Canvas{
 	public void paintReuseGraphics(Graphics g, int x, int y){
 		g.translate(x, y);
 		paint(g);
+		
+		//get the point of connection to other flowers
+		connectionCenter.setLocation(x+totalWidth/2, y+totalWidth/2);
 		g.translate(-x, -y);
 	}
 	

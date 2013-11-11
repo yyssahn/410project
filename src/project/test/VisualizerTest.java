@@ -5,6 +5,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 
 import project.flowerVisualizer.Flower;
+import project.flowerVisualizer.FlowerRelation;
 import project.flowerVisualizer.FlowerVisualizer;
 import project.flowerVisualizer.FlowerVisualizerImpl;
 
@@ -26,8 +27,13 @@ public class VisualizerTest {
 			toPass.add(mySecondFlower);
 		}
 		
+		ArrayList<FlowerRelation> relations = new ArrayList<FlowerRelation>();
+		relations.add(new FlowerRelation(0, 1, 5));
+		relations.add(new FlowerRelation(0, 2, 4));
+		relations.add(new FlowerRelation(3, 2, 1));
+		
 		FlowerVisualizer myFV = new FlowerVisualizerImpl();
-		myFV.drawFlowers(toPass);
+		myFV.drawFlowers(toPass, 640, 480, relations);
 	}
 
 }
