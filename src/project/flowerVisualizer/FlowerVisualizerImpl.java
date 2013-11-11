@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Label;
-import java.awt.Panel;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -33,11 +32,13 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		mainWindowFrame.setIconImage(myIcon);
 		
 		ScrollPane myScrollPane = new ScrollPane();
-		Panel myPanel = new Panel();
+		FlowerPanel myPanel = new FlowerPanel();
 		//Debug
 		for (Flower currentFlower : flowerList)
 			//mainWindowFrame.add(new FlowerComponent(currentFlower));
 			myPanel.add(new FlowerComponent(currentFlower));
+		
+		myPanel.init();
 		
 		//Need this to close the windows and the program
 		mainWindowFrame.addWindowListener(new WindowAdapter(){

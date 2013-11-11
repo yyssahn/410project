@@ -12,10 +12,11 @@ import java.awt.Graphics2D;
 @SuppressWarnings("serial")
 public class FlowerComponent extends Canvas{
 	private Flower flowerData;
-	private int totalWidth;
+	public int totalWidth;
 	private int totalHeight;
 	private final int DEFAULTROOTSIZE = 60;
 	private int rootSize;
+	public int x, y;
 
 
 	public FlowerComponent(Flower flowerData) {
@@ -27,17 +28,24 @@ public class FlowerComponent extends Canvas{
 		rootSize = (flowerData.hasRoots() ? 1 : 0) * DEFAULTROOTSIZE;
 		totalHeight = totalWidth + flowerData.getStemHeight() + rootSize;
 		this.setSize(totalWidth, totalHeight);
+		this.setVisible(false);
 	}
-
+	
+	
+	public void paintReuseGraphics(Graphics g, int x, int y){
+		g.translate(x, y);
+		paint(g);
+		g.translate(-x, -y);
+	}
+	
 	//Do not look here, I am a bit ashamed =(
 	@Override
 	public void paint(Graphics g){
 		if (flowerData == null)
 		{	
-			System.out.print("Trying to draw an empty Flower");
+			System.out.println("Trying to draw an empty Flower");
 			return;
 		}
-
 		this.setSize(totalWidth, totalHeight);
 		
 		//Need to change the size of a stroke
@@ -125,5 +133,6 @@ public class FlowerComponent extends Canvas{
 		g.setFont(f);
 		g.drawString(flowerData.getClassName(), 0, 10);
 	}
+
 
 }
