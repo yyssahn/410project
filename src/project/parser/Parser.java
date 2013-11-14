@@ -147,27 +147,27 @@ public class Parser {
 		return cobj;
 	}
 	//loop directory to get file list
-	public static void ParseFilesInDir() throws IOException{
+	public static ArrayList<ClassObject> ParseFilesInDir() throws IOException{
 		File dirs = new File(".");
 		String dirPath = dirs.getCanonicalPath() + File.separator+"code"+File.separator + "TreeFinder" + File.separator;
- 
+		ArrayList<ClassObject> ClassList = new ArrayList<ClassObject>();
+		
 		File root = new File(dirPath);
 		//System.out.println(rootDir.listFiles());
 		File[] files = root.listFiles ( );
 		String filePath = null;
-		String filePathTwo = null;
 		 for (File f : files ) {
-			 filePath = f.getAbsolutePath();
 			 File[] filetwo = f.listFiles();
 			 for (File g : filetwo){
-				 filePathTwo= g.getAbsolutePath();
+				 filePath= g.getAbsolutePath();
 				 if (g.isFile()){
-					 parse(readFileToString(filePathTwo));
-					 
+					 ClassObject cobj = parse(readFileToString(filePath));
+					 ClassList.add(cobj);
 				 }
 			 }
 			 
 		 }
+		 return ClassList;
 	}
 	//read file content into a string
 		public static String readFileToString(String filePath) throws IOException {
