@@ -9,6 +9,15 @@ public interface FlowerVisualizer {
 	
 	/**
 	 * An entry point to the Visualizer which draws the flowers on the window of specified size. 
+	 * @param flowerTree - the tree of Flowers to draw the package info.
+	 * @param width - width of the window where the flowers would be made.
+	 * @param height - height of the window where the flowers would be made.
+	 * @param relationList - a list of relationships between the flowers.
+	 */
+	public void drawFlowers(FlowerComposite flowerTree, int width, int height, ArrayList<FlowerRelation> relationList);
+	
+	/**
+	 * An entry point to the Visualizer which draws the flowers on the window of specified size. 
 	 * @param flowerList - the list of flowers to draw.
 	 * @param width - width of the window where the flowers would be made.
 	 * @param height - height of the window where the flowers would be made.

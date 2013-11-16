@@ -19,6 +19,14 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 	final int HEIGHT = 480;
 
 	@Override
+	public void drawFlowers(FlowerComposite flowerTree, int width, int height,
+			ArrayList<FlowerRelation> relationList) {
+		// TODO Make a sane implementation - right now just ignores the structure.
+		drawFlowers(flowerTree.getFlowerList(), width, height, relationList);
+	}
+	
+	
+	@Override
 	public void drawFlowers(ArrayList<Flower> flowerList, int width,
 			int height, ArrayList<FlowerRelation> relationList) {
 		Frame mainWindowFrame = new Frame();
@@ -35,7 +43,7 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		FlowerPanel myPanel = new FlowerPanel();
 
 		for (Flower currentFlower : flowerList)
-			myPanel.add(new FlowerComponent(currentFlower));
+			myPanel.add(new FlowerUIComponent(currentFlower));
 
 		myPanel.addRelations(relationList);
 		myPanel.init();
@@ -64,5 +72,5 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 	public void drawFlowers(ArrayList<Flower> flowerList) {
 		drawFlowers(flowerList, WIDTH, HEIGHT);		
 	}
-	
+
 }

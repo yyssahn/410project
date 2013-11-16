@@ -8,6 +8,7 @@ import project.flowerVisualizer.Flower;
 import project.flowerVisualizer.FlowerRelation;
 import project.flowerVisualizer.FlowerVisualizer;
 import project.flowerVisualizer.FlowerVisualizerImpl;
+import project.flowerVisualizer.Palette;
 
 
 public class VisualizerTest {
@@ -26,6 +27,9 @@ public class VisualizerTest {
 			toPass.add(myFirstFlower);
 			toPass.add(mySecondFlower);
 		}
+		
+		//Changes the color of the Flower
+		toPass.get(4).setPrimaryColor(Palette.CARROT);
 		
 		ArrayList<FlowerRelation> relations = new ArrayList<FlowerRelation>();
 		relations.add(new FlowerRelation(0, 1, 5));

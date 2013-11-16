@@ -1,7 +1,9 @@
 package project.flowerVisualizer;
 
+import java.util.ArrayList;
 
-public class Flower {
+
+public class Flower extends FlowerComponent{
 	
 	private int xpos;	//Leftmost point
 	private int ypos;	//Bottom point
@@ -13,9 +15,6 @@ public class Flower {
 	
 	private boolean hasLeaves;
 	private int numberOfRoots; //= 6;
-	
-	private String className;
-	
 	
 	//TODO: For the future extensions:
 		//private String [] methodName;
@@ -43,7 +42,10 @@ public class Flower {
 		this.petalRadius = petalRadius;
 		this.numberOfRoots = numberOfRoots;
 		this.hasLeaves = hasLeaves;
-		this.className = className;
+		this.name = className;
+		
+		//Primary color is the color of the core.
+		this.primaryColor = Palette.ALIZARIN;
 	}
 
 	
@@ -126,15 +128,6 @@ public class Flower {
 		this.hasLeaves = hasLeaves;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
-
-	public String getClassName() {
-		return this.className;
-	}
-	
-
 	public int getNumberOfRoots() {
 		return numberOfRoots;
 	}
@@ -142,6 +135,14 @@ public class Flower {
 
 	public void setnumberOfRoots(int numberOfRoots) {
 		this.numberOfRoots = numberOfRoots;
+	}
+
+
+	@Override
+	public ArrayList<Flower> getFlowerList() {
+		ArrayList<Flower> toReturn = new ArrayList<Flower>();
+		toReturn.add(this);
+		return toReturn;
 	}
 	
 }

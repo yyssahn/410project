@@ -42,14 +42,14 @@ public class FlowerPanel extends Panel {
 	public void paint(Graphics g)
 	{
 		
-		this.setPreferredSize(new Dimension(flowersWidth, 200));
+		//this.setPreferredSize(new Dimension(flowersWidth, 200));
 		
 		offset = Math.max((getWidth() - flowersWidth)/2, 5);
 						
 		for (Component current: getComponents())
 		{
-			((FlowerComponent) current).paintReuseGraphics(g, offset, Math.max(getHeight()-current.getHeight(), miny));
-			offset+=((FlowerComponent) current).totalWidth;
+			((FlowerUIComponent) current).paintReuseGraphics(g, offset, Math.max(getHeight()-current.getHeight(), miny));
+			offset+=((FlowerUIComponent) current).totalWidth;
 		}
 		
 		//g.drawArc(0, 0, 100, 100, 0, 180);
@@ -68,13 +68,12 @@ public class FlowerPanel extends Panel {
 		int leftIndex = Math.min(relation.fromFlower,relation.toFlower);
 		int rightIndex = Math.max(relation.fromFlower,relation.toFlower);
 		
-		Point left = ((FlowerComponent) getComponent(leftIndex)).connectionCenter;
-		Point right = ((FlowerComponent) getComponent(rightIndex)).connectionCenter;
+		Point left = ((FlowerUIComponent) getComponent(leftIndex)).connectionCenter;
+		Point right = ((FlowerUIComponent) getComponent(rightIndex)).connectionCenter;
 		
 		int maxheight = Math.min(left.y, right.y) - (rightIndex-leftIndex) * relationArcCoefficient;
 		
-		Graphics2D g2d = ((Graphics2D) g);
-		g2d.setStroke(new BasicStroke(relation.connectionWidth));
+		((Graphics2D) g).setStroke(new BasicStroke(relation.connectionWidth));
 		g.setColor(CONNECTIONCOLOR);
 		g.drawArc(left.x, maxheight, right.x-left.x, (left.y-maxheight)*2, 90, 90);
 		g.drawArc(left.x, maxheight, right.x-left.x, (right.y-maxheight)*2, 0, 90);
