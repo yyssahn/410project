@@ -40,4 +40,14 @@ public interface FlowerVisualizer {
 	 * @param flowerList - the list of flowers to draw.
 	 */
 	public void drawFlowers(ArrayList<Flower> flowerList);
+	
+	/**
+	 * Adds a nice scale to show the number of lines of code involved. Ignored if no drawFlowers was executed beforehand.
+	 * @param x - x coordinate of the bottom of the scale.
+	 * @param y - y coordinate of the bottom. (Measured from the bottom of the window.)
+	 * @param height - height from the bottom of the scale to the top.
+	 * @param middleText - text to be displayed at the middle of the scale.
+	 * @param upperText - text to be displayed at the top of the scale.
+	 */
+	public void requestScale(int x, int y, int height, String middleText, String upperText);
 }

@@ -40,7 +40,7 @@ public class Palette {
 	 * 
 	 * @param baseColor - the Color to add transparency to.
 	 * @param alpha - a number in [0, 255] that shows how much transparency to add 
-	 *  (0 - no transparency, 255 - full transparency)
+	 *  (0 - absolute transparency, 255 - no transparency)
 	 * @return A Color with RGB components equal to the baseColor and with alpha component set to alpha.
 	 */
 		public static Color setTransparency(Color baseColor, int alpha)

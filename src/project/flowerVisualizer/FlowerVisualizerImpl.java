@@ -16,11 +16,13 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 
 	final int DEFAULT_WIDTH = 640;
 	final int DEFAULT_HEIGHT = 480;
+	
+	FlowerPanel myPanel;
 
-	@Override
-	public void drawFlowers(FlowerComposite flowerTree, int width, int height,
-			ArrayList<FlowerRelation> relationList) {
-		
+	//A helper method not to have duplicate code
+	private void drawFlowers(FlowerComposite flowerTree, ArrayList<Flower> flowerList, int width, int height,
+			ArrayList<FlowerRelation> relationList)
+	{
 		Frame mainWindowFrame = new Frame();
 		mainWindowFrame.setSize(width, height);
 		mainWindowFrame.setBackground(Palette.CLOUDS);
@@ -41,12 +43,20 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		});
 
 		ScrollPane myScrollPane = new ScrollPane();
-		FlowerPanel myPanel = new FlowerPanel();
+		myPanel = new FlowerPanel();
 
-		myPanel.add(flowerTree.makeUIWrap());			
+		
+		//The only section of the code that type-dependent
+		if (flowerTree!=null)
+			myPanel.add(flowerTree.makeUIWrap());
+		else if (flowerList!=null)
+			for (Flower currentFlower : flowerList)
+				myPanel.add(currentFlower.makeUIWrap());
 
+		
 		myPanel.addRelations(relationList);
 		myPanel.init();
+
 
 		myScrollPane.add(myPanel);
 		mainWindowFrame.add(myScrollPane);
@@ -54,48 +64,20 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		mainWindowFrame.setVisible(true);	
 	}
 	
+	///The followings are the implementation of the interface that call each other in order to end up in the helper.
+	@Override
+	public void drawFlowers(FlowerComposite flowerTree, int width, int height,
+			ArrayList<FlowerRelation> relationList) {
+		drawFlowers(flowerTree, null, width, height, relationList);	
+	}
+	
 	
 	@Override
 	public void drawFlowers(ArrayList<Flower> flowerList, int width,
 			int height, ArrayList<FlowerRelation> relationList) {
-		Frame mainWindowFrame = new Frame();
-		mainWindowFrame.setSize(width, height);
-		mainWindowFrame.setBackground(Palette.CLOUDS);
-		mainWindowFrame.add(new Label("Hallo"));
-		mainWindowFrame.setLayout(new BorderLayout());
-
-		mainWindowFrame.setTitle("It is Robotanism! Your code is filled with flowers~");
-		Image myIcon = Toolkit.getDefaultToolkit().getImage("assets/icon0.png");
-		mainWindowFrame.setIconImage(myIcon);
-		
-		//Need this to close the windows and the program
-		mainWindowFrame.addWindowListener(new WindowAdapter(){
-			@Override
-			public void windowClosing(WindowEvent we)
-			{
-				System.exit(0);
-			}
-		});
-
-		ScrollPane myScrollPane = new ScrollPane();
-		FlowerPanel myPanel = new FlowerPanel();
-
-		for (Flower currentFlower : flowerList)
-		{
-			myPanel.add(currentFlower.makeUIWrap());
-		}
-			
-
-		myPanel.addRelations(relationList);
-		myPanel.init();
-
-
-		myScrollPane.add(myPanel);
-		mainWindowFrame.add(myScrollPane);
-
-		mainWindowFrame.setVisible(true);		
+			drawFlowers(null, flowerList, width, height, relationList);
 	}
-
+	
 	@Override
 	public void drawFlowers(ArrayList<Flower> flowerList, int width, int height) {
 		drawFlowers(flowerList, width, height, new ArrayList<FlowerRelation>());
@@ -106,4 +88,9 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		drawFlowers(flowerList, DEFAULT_WIDTH, DEFAULT_HEIGHT);		
 	}
 
+	@Override
+	public void requestScale(int x, int y, int height, String middleText, String upperText){
+		if (myPanel!=null)
+			myPanel.prepareScale(x, y, height, middleText, upperText);
+	}
 }

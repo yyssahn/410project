@@ -22,6 +22,25 @@ public class FlowerPanel extends Canvas {
 	private ArrayList<FlowerRelation> relations; 
 	final private Color CONNECTIONCOLOR = new Color(243, 156, 18, 255);
 	
+	private int scaleX, scaleY, scaleHeight;
+	private String scaleMiddleString, scaleUpperString;
+	
+	/**
+	 * Prepares a nice scale to show the number of lines of code involved.
+	 * @param x - x coordinate of the bottom of the scale.
+	 * @param y - y coordinate of the bottom. (Measured from the bottom of the panel.)
+	 * @param height - height from the bottom of the scale to the top.
+	 * @param middleText - text to be displayed at the middle of the scale.
+	 * @param upperText - text to be displayed at the top of the scale.
+	 */
+	public void prepareScale(int x, int y, int height, String middleText, String upperText){
+		scaleX = x;
+		scaleY = y;
+		scaleHeight = height;
+		scaleMiddleString = middleText;
+		scaleUpperString = upperText;
+	}
+	
 	private static final long serialVersionUID = -4877282940745566348L;
 	
 	/**Required to be executed after all the FlowerComponents are added.
@@ -40,7 +59,6 @@ public class FlowerPanel extends Canvas {
 			flowers.addAll(current.getFlowerUIList());
 			}
 		this.setPreferredSize(new Dimension(flowersWidth, flowersHeight));
-		System.out.println("Panel inited. x = " + flowersWidth + ", y = " + flowersHeight);
 	}
 	
 	/**
@@ -50,6 +68,8 @@ public class FlowerPanel extends Canvas {
 		this.relations = relationList;
 	};
 
+	
+	
 	public void paint(Graphics g)
 	{
 		
@@ -68,9 +88,10 @@ public class FlowerPanel extends Canvas {
 		for (FlowerRelation current: relations)
 			drawRelation(current, g);
 		
+		drawScale(g);
+		
 		g.dispose();
 		g.finalize();
-		
 	}
 	
 	private void drawRelation(FlowerRelation relation, Graphics g)
@@ -89,6 +110,21 @@ public class FlowerPanel extends Canvas {
 		g.drawArc(left.x, maxheight, right.x-left.x, (left.y-maxheight)*2, 90, 90);
 		g.drawArc(left.x, maxheight, right.x-left.x, (right.y-maxheight)*2, 0, 90);
 		
+	}
+	
+	
+	public void drawScale(Graphics g){
+		//Check for scale not set
+		if (scaleHeight == 0 )
+			return;
+		
+		g.setColor(Palette.setTransparency(Palette.MIDNIGHT_BLUE, 200));
+		((Graphics2D) g).setStroke(new BasicStroke(2));
+		g.drawLine(scaleX, this.getHeight() - scaleY, scaleX, this.getHeight()-scaleY-scaleHeight);
+		
+		g.drawString(scaleUpperString, scaleX-20, this.getHeight() - scaleY - scaleHeight-g.getFont().getSize());
+		
+		g.drawString(scaleMiddleString, scaleX-20, this.getHeight() - scaleY - (scaleHeight+g.getFont().getSize())/2);
 	}
 	
 	public void add(FlowerUIComponent toAdd){

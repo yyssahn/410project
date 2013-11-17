@@ -42,7 +42,9 @@ public class VisualizerTestPackage {
 		relations.add(new FlowerRelation(3, 2, 1));
 		
 		FlowerVisualizer myFV = new FlowerVisualizerImpl();
+	
 		myFV.drawFlowers(two, 640, 480, relations);
+		myFV.requestScale(40, 80, 350, "Middle", "Top");
 	}
 
 }
