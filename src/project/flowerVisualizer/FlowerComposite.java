@@ -61,4 +61,9 @@ public class FlowerComposite extends FlowerComponent{
 		this.children = children;
 	}
 
+	@Override
+	public FlowerUIComponent makeUIWrap() {
+		return new FlowerUIComposite().wrapAround(this);
+	}
+
 }

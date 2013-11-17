@@ -43,7 +43,7 @@ public class Palette {
 	 *  (0 - no transparency, 255 - full transparency)
 	 * @return A Color with RGB components equal to the baseColor and with alpha component set to alpha.
 	 */
-		public Color SetTransparency(Color baseColor, int alpha)
+		public static Color setTransparency(Color baseColor, int alpha)
 		{
 			if (alpha > 255)
 				alpha = 255;

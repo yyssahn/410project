@@ -144,5 +144,11 @@ public class Flower extends FlowerComponent{
 		toReturn.add(this);
 		return toReturn;
 	}
+
+
+	@Override
+	public FlowerUIComponent makeUIWrap() {
+		return new FlowerUI().wrapAround(this);
+	}
 	
 }

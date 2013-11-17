@@ -1,22 +1,24 @@
 package project.flowerVisualizer;
 
 import java.awt.BasicStroke;
+import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Panel;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class FlowerPanel extends Panel {
+public class FlowerPanel extends Canvas {
 
 	private int flowersWidth = 0;
+	private int flowersHeight = 0;
 	private int offset = 0;
 	private int miny = 10;
 	//TODO: explain that
 	private int relationArcCoefficient = 40;
+	private ArrayList<FlowerUIComponent> components = new ArrayList<FlowerUIComponent>();
+	private ArrayList<FlowerUI> flowers;
 	private ArrayList<FlowerRelation> relations; 
 	final private Color CONNECTIONCOLOR = new Color(243, 156, 18, 255);
 	
@@ -27,9 +29,18 @@ public class FlowerPanel extends Panel {
 	 */	
 	public void init()
 	{
-		for (Component current:getComponents())
+		flowersHeight = 200;
+		flowers =  new ArrayList<FlowerUI>();
+		for (FlowerUIComponent current:components)
+			{
+			current.init();
 			flowersWidth+=current.getWidth();
-		this.setPreferredSize(new Dimension(flowersWidth, 200));
+			if (current.getHeight() > flowersHeight)
+				flowersHeight = current.getHeight();
+			flowers.addAll(current.getFlowerUIList());
+			}
+		this.setPreferredSize(new Dimension(flowersWidth, flowersHeight));
+		System.out.println("Panel inited. x = " + flowersWidth + ", y = " + flowersHeight);
 	}
 	
 	/**
@@ -46,10 +57,10 @@ public class FlowerPanel extends Panel {
 		
 		offset = Math.max((getWidth() - flowersWidth)/2, 5);
 						
-		for (Component current: getComponents())
+		for (FlowerUIComponent current: components)
 		{
-			((FlowerUIComponent) current).paintReuseGraphics(g, offset, Math.max(getHeight()-current.getHeight(), miny));
-			offset+=((FlowerUIComponent) current).totalWidth;
+			current.paintReuseGraphics(g, offset, Math.max(getHeight()-current.getHeight(), miny));
+			offset+=current.getWidth();
 		}
 		
 		//g.drawArc(0, 0, 100, 100, 0, 180);
@@ -68,8 +79,8 @@ public class FlowerPanel extends Panel {
 		int leftIndex = Math.min(relation.fromFlower,relation.toFlower);
 		int rightIndex = Math.max(relation.fromFlower,relation.toFlower);
 		
-		Point left = ((FlowerUIComponent) getComponent(leftIndex)).connectionCenter;
-		Point right = ((FlowerUIComponent) getComponent(rightIndex)).connectionCenter;
+		Point left = flowers.get(leftIndex).connectionCenter;
+		Point right = flowers.get(rightIndex).connectionCenter;
 		
 		int maxheight = Math.min(left.y, right.y) - (rightIndex-leftIndex) * relationArcCoefficient;
 		
@@ -78,5 +89,9 @@ public class FlowerPanel extends Panel {
 		g.drawArc(left.x, maxheight, right.x-left.x, (left.y-maxheight)*2, 90, 90);
 		g.drawArc(left.x, maxheight, right.x-left.x, (right.y-maxheight)*2, 0, 90);
 		
+	}
+	
+	public void add(FlowerUIComponent toAdd){
+		components.add(toAdd);
 	}
 }

@@ -2,7 +2,6 @@ package project.flowerVisualizer;
 
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Label;
@@ -15,39 +14,23 @@ import java.util.ArrayList;
 
 public class FlowerVisualizerImpl implements FlowerVisualizer{
 
-	final int WIDTH = 640;
-	final int HEIGHT = 480;
+	final int DEFAULT_WIDTH = 640;
+	final int DEFAULT_HEIGHT = 480;
 
 	@Override
 	public void drawFlowers(FlowerComposite flowerTree, int width, int height,
 			ArrayList<FlowerRelation> relationList) {
-		// TODO Make a sane implementation - right now just ignores the structure.
-		drawFlowers(flowerTree.getFlowerList(), width, height, relationList);
-	}
-	
-	
-	@Override
-	public void drawFlowers(ArrayList<Flower> flowerList, int width,
-			int height, ArrayList<FlowerRelation> relationList) {
+		
 		Frame mainWindowFrame = new Frame();
-		mainWindowFrame.setSize(640, 480);
-		mainWindowFrame.setBackground(new Color(236, 240, 241));
+		mainWindowFrame.setSize(width, height);
+		mainWindowFrame.setBackground(Palette.CLOUDS);
 		mainWindowFrame.add(new Label("Hallo"));
 		mainWindowFrame.setLayout(new BorderLayout());
 
 		mainWindowFrame.setTitle("It is Robotanism! Your code is filled with flowers~");
 		Image myIcon = Toolkit.getDefaultToolkit().getImage("assets/icon0.png");
 		mainWindowFrame.setIconImage(myIcon);
-
-		ScrollPane myScrollPane = new ScrollPane();
-		FlowerPanel myPanel = new FlowerPanel();
-
-		for (Flower currentFlower : flowerList)
-			myPanel.add(new FlowerUIComponent(currentFlower));
-
-		myPanel.addRelations(relationList);
-		myPanel.init();
-
+		
 		//Need this to close the windows and the program
 		mainWindowFrame.addWindowListener(new WindowAdapter(){
 			@Override
@@ -56,6 +39,56 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 				System.exit(0);
 			}
 		});
+
+		ScrollPane myScrollPane = new ScrollPane();
+		FlowerPanel myPanel = new FlowerPanel();
+
+		myPanel.add(flowerTree.makeUIWrap());			
+
+		myPanel.addRelations(relationList);
+		myPanel.init();
+
+		myScrollPane.add(myPanel);
+		mainWindowFrame.add(myScrollPane);
+
+		mainWindowFrame.setVisible(true);	
+	}
+	
+	
+	@Override
+	public void drawFlowers(ArrayList<Flower> flowerList, int width,
+			int height, ArrayList<FlowerRelation> relationList) {
+		Frame mainWindowFrame = new Frame();
+		mainWindowFrame.setSize(width, height);
+		mainWindowFrame.setBackground(Palette.CLOUDS);
+		mainWindowFrame.add(new Label("Hallo"));
+		mainWindowFrame.setLayout(new BorderLayout());
+
+		mainWindowFrame.setTitle("It is Robotanism! Your code is filled with flowers~");
+		Image myIcon = Toolkit.getDefaultToolkit().getImage("assets/icon0.png");
+		mainWindowFrame.setIconImage(myIcon);
+		
+		//Need this to close the windows and the program
+		mainWindowFrame.addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent we)
+			{
+				System.exit(0);
+			}
+		});
+
+		ScrollPane myScrollPane = new ScrollPane();
+		FlowerPanel myPanel = new FlowerPanel();
+
+		for (Flower currentFlower : flowerList)
+		{
+			myPanel.add(currentFlower.makeUIWrap());
+		}
+			
+
+		myPanel.addRelations(relationList);
+		myPanel.init();
+
 
 		myScrollPane.add(myPanel);
 		mainWindowFrame.add(myScrollPane);
@@ -70,7 +103,7 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 
 	@Override
 	public void drawFlowers(ArrayList<Flower> flowerList) {
-		drawFlowers(flowerList, WIDTH, HEIGHT);		
+		drawFlowers(flowerList, DEFAULT_WIDTH, DEFAULT_HEIGHT);		
 	}
 
 }

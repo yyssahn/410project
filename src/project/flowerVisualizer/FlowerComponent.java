@@ -48,6 +48,13 @@ public abstract class FlowerComponent {
 	}
 
 	public void setName(String name) {
+
 		this.name = name;
 	}
+	
+	/**
+	 * Wraps this object into the UI class for visualization.
+	 * @return FlowerUIComponent that contains this FlowerComponent.
+	 */
+	public abstract FlowerUIComponent makeUIWrap();
 }
