@@ -12,7 +12,7 @@ import project.flowerVisualizer.FlowerVisualizerImpl;
 import project.flowerVisualizer.Palette;
 
 
-public class VisualizerTestPanel {
+public class VisualizerTestPackage {
 
 	public static Frame one;
 	public static void main(String[] args) {
@@ -37,9 +37,9 @@ public class VisualizerTestPanel {
 		two.setName("Big set of Flowers!");
 		
 		ArrayList<FlowerRelation> relations = new ArrayList<FlowerRelation>();
-		//relations.add(new FlowerRelation(0, 1, 5));
-		//relations.add(new FlowerRelation(0, 2, 4));
-		//relations.add(new FlowerRelation(3, 2, 1));
+		relations.add(new FlowerRelation(0, 1, 5));
+		relations.add(new FlowerRelation(0, 2, 4));
+		relations.add(new FlowerRelation(3, 2, 1));
 		
 		FlowerVisualizer myFV = new FlowerVisualizerImpl();
 		myFV.drawFlowers(two, 640, 480, relations);

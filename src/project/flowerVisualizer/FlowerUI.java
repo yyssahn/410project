@@ -29,11 +29,6 @@ public class FlowerUI extends FlowerUIComponent{
 		if (flowerData == null)
 			return null;
 		this.flowerData = flowerData;
-		int totalRadius = flowerData.getCoreRadius() + flowerData.getPetalRadius();
-		width = 2*totalRadius;
-		rootSize = (flowerData.hasRoots() ? 1 : 0) * DEFAULTROOTSIZE;
-		height = width + flowerData.getStemHeight() + rootSize;
-		//this.setSize(totalWidth, totalHeight);
 		return this;
 	}
 	
@@ -42,8 +37,9 @@ public class FlowerUI extends FlowerUIComponent{
 		g.translate(x, y);
 		paint(g);
 		
-		//get the point of connection to other flowers
-		connectionCenter.setLocation(x+width/2, y+width/2);
+		//get the point of connection to other flowers 	//Thank you once again, CPSC 314!
+		connectionCenter.setLocation(((Graphics2D) g).getTransform().getTranslateX() + width/2,
+				((Graphics2D) g).getTransform().getTranslateY() + width/2);
 		g.translate(-x, -y);
 	}
 	
@@ -152,7 +148,10 @@ public class FlowerUI extends FlowerUIComponent{
 
 	@Override
 	public void init() {
-		//Was already initialized when was wrapped.
+		int totalRadius = flowerData.getCoreRadius() + flowerData.getPetalRadius();
+		width = 2*totalRadius;
+		rootSize = (flowerData.hasRoots() ? 1 : 0) * DEFAULTROOTSIZE;
+		height = width + flowerData.getStemHeight() + rootSize;
 	}
 
 }
