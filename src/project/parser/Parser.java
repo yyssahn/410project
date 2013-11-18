@@ -105,15 +105,18 @@ public class Parser {
 	//	test.translateClass(classes);
     }
 	*/
-	public static ClassObject parse(String str){
-		final ClassObject cobj;
-		cobj = new ClassObject();
+	public static ClassObject parse(String str, final ClassObject cobj){
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setSource(str.toCharArray());
 		parser.setKind(ASTParser.K_COMPILATION_UNIT);
 		final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
 		cu.accept(new ASTVisitor(){
-
+			
+			
+			public boolean visit(ClassInstanceCreation node){
+						return true;
+						
+					}
 			public boolean visit(MethodDeclaration node){
 				MethodObject mobj = new MethodObject();
 				mobj.setName(node.getName().toString());
@@ -148,8 +151,11 @@ public class Parser {
 		});
 		return cobj;
 	}
+	
+	// This method is no longer needed
+	
 	//loop directory to get file list
-	public static ArrayList<ClassObject> ParseFilesInDir() throws IOException{
+	/*public static ArrayList<ClassObject> ParseFilesInDir() throws IOException{
 		File dirs = new File(".");
 		String dirPath = dirs.getCanonicalPath() + File.separator+"code"+File.separator + "TreeFinder" + File.separator;
 		ArrayList<ClassObject> ClassList = new ArrayList<ClassObject>();
@@ -163,7 +169,7 @@ public class Parser {
 			 for (File g : filetwo){
 				 filePath= g.getAbsolutePath();
 				 if (g.isFile()){
-					 ClassObject cobj = parse(readFileToString(filePath));
+					 ClassObject cobj = parse(readFileToString(filePath), filePath);
 					 ClassList.add(cobj);
 				 }
 			 }
@@ -171,6 +177,7 @@ public class Parser {
 		 }
 		 return ClassList;
 	}
+	*/
 	//input with string dirpath
 	public static ArrayList<ClassObject> ParseFilesInDir(String str) throws IOException{
 		//File dirs = new File(".");
@@ -214,7 +221,8 @@ public class Parser {
 	        } else {
 	        	ClassObject cobj = new ClassObject();
 	        	String filepath = file.getAbsolutePath();
-	        	cobj = parse(readFileToString(filepath));
+	        	cobj.setClassName(filepath);
+	        	parse(readFileToString(filepath),cobj);
 	        	classlist.add(cobj);
 	        }
 	    }
@@ -237,5 +245,13 @@ public class Parser {
 	 
 			return  fileData.toString();	
 		}
+		
+		// To do
+		public int[][] findrelation(ArrayList<ClassObject> clist){
+			int[][] relation = new int[clist.size()][clist.size()];
+			
+			return relation;
+		}
+		
 	
 }
