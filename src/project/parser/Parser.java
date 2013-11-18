@@ -42,6 +42,7 @@ public class Parser {
 	private static ClassObject classObject;
 
 	//Mike: Rename it and use ParserTest?
+/*
 	public static void main(String[] args) throws Exception {
 		classes = new ArrayList<ClassObject>();
 		
@@ -82,27 +83,28 @@ public class Parser {
 //			classObject = new ClassObject(imports, methods, numberOfLines, className);
 
 			//Testing
-			System.out.println("Lines in class: " + classObject.getNumberOfLines() + "\n");
+///			System.out.println("Lines in class: " + classObject.getNumberOfLines() + "\n");
 
-			ArrayList<String> testImports = classObject.getImports();
-			System.out.println("Printing imports:");
-			for(int i=0; i<testImports.size(); i++){
-				System.out.println("   " + testImports.get(i));
-			}
+//			ArrayList<String> testImports = classObject.getImports();
+//			System.out.println("Printing imports:");
+//			for(int i=0; i<testImports.size(); i++){
+//				System.out.println("   " + testImports.get(i));
+//			}
 
-			ArrayList<MethodObject> testMethods = classObject.getMethods();
-			System.out.println("Printing method objects");
-			for(int i=0; i<testMethods.size(); i++){
-				System.out.println("   Method name: " + testMethods.get(i).getName());
-				System.out.println("   Method size: " + testMethods.get(i).getNumberOfLines() + " lines \n");
+//			ArrayList<MethodObject> testMethods = classObject.getMethods();
+//			System.out.println("Printing method objects");
+//			for(int i=0; i<testMethods.size(); i++){
+//				System.out.println("   Method name: " + testMethods.get(i).getName());
+//				System.out.println("   Method size: " + testMethods.get(i).getNumberOfLines() + " lines \n");
 			}
 
 			classes.add(classObject);
 		}
 		
-        ClassTranslator test = new ClassTranslatorImpl();
-		test.translateClass(classes);
+      //  ClassTranslator test = new ClassTranslatorImpl();
+	//	test.translateClass(classes);
     }
+	*/
 	public static ClassObject parse(String str){
 		final ClassObject cobj;
 		cobj = new ClassObject();
@@ -168,6 +170,54 @@ public class Parser {
 			 
 		 }
 		 return ClassList;
+	}
+	//input with string dirpath
+	public static ArrayList<ClassObject> ParseFilesInDir(String str) throws IOException{
+		//File dirs = new File(".");
+		//String dirPath = dirs.getCanonicalPath() + File.separator+"code"+File.separator + "TreeFinder" + File.separator;
+		ArrayList<ClassObject> ClassList = new ArrayList<ClassObject>();
+		
+		File root = new File(str);
+		//System.out.println(rootDir.listFiles());
+		File[] files = root.listFiles ( );
+		iterateFiles(files, ClassList);
+		
+		//String filePath = null;
+		/* for (File f : files ) {
+			
+			 File[] filetwo = f.listFiles();
+			 int j = 0;
+			 while(j< filetwo.length){
+				 if (filetwo[j].isDirectory()){
+					 
+				 }
+				 
+				 
+				 j++;
+			 }
+			 for (File g : filetwo){
+				 filePath= g.getAbsolutePath();
+				 if (g.isFile()){
+					 ClassObject cobj = parse(readFileToString(filePath));
+					 ClassList.add(cobj);
+				 }
+			 }
+			 
+		 }
+		 */
+		 return ClassList;
+	}
+	public static void iterateFiles(File[] files, ArrayList<ClassObject> classlist) throws IOException{
+	    for (File file : files) {
+	        if (file.isDirectory()) {
+	            iterateFiles(file.listFiles(), classlist); // Calls same method again.
+	        } else {
+	        	ClassObject cobj = new ClassObject();
+	        	String filepath = file.getAbsolutePath();
+	        	cobj = parse(readFileToString(filepath));
+	        	classlist.add(cobj);
+	        }
+	    }
 	}
 	//read file content into a string
 		public static String readFileToString(String filePath) throws IOException {

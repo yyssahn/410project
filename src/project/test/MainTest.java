@@ -13,6 +13,6 @@ public class MainTest {
 				"code/TreeFinder/server/imagedao.java", 
 				"code/TreeFinder/server/PMF.java", 
 				"code/TreeFinder/server/XMLParser.java"};
-		Parser.main(fileList);
+//		Parser.main(fileList);
 	}
 }
