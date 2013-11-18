@@ -37,9 +37,11 @@ public class VisualizerTestPackage {
 		two.setName("Big set of Flowers!");
 		
 		ArrayList<FlowerRelation> relations = new ArrayList<FlowerRelation>();
-		relations.add(new FlowerRelation(0, 1, 5));
-		relations.add(new FlowerRelation(0, 2, 4));
+		relations.add(new FlowerRelation(0, 1, 2));
+		relations.add(new FlowerRelation(0, 2, 3));
+		relations.add(new FlowerRelation(1, 0, 2));
 		relations.add(new FlowerRelation(3, 2, 1));
+		relations.add(new FlowerRelation(3, 0, 2));
 		
 		FlowerVisualizer myFV = new FlowerVisualizerImpl();
 	

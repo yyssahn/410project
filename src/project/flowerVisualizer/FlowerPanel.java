@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 public class FlowerPanel extends Canvas {
@@ -96,7 +97,6 @@ public class FlowerPanel extends Canvas {
 	
 	private void drawRelation(FlowerRelation relation, Graphics g)
 	{
-		//undirected for now
 		int leftIndex = Math.min(relation.fromFlower,relation.toFlower);
 		int rightIndex = Math.max(relation.fromFlower,relation.toFlower);
 		
@@ -105,13 +105,51 @@ public class FlowerPanel extends Canvas {
 		
 		int maxheight = Math.min(left.y, right.y) - (rightIndex-leftIndex) * relationArcCoefficient;
 		
+		//Lifting the right relations not to have bidirectional coincide.
+		if (relation.fromFlower>relation.toFlower)
+			maxheight += relationArcCoefficient/4;
+		
 		((Graphics2D) g).setStroke(new BasicStroke(relation.connectionWidth));
 		g.setColor(CONNECTIONCOLOR);
 		g.drawArc(left.x, maxheight, right.x-left.x, (left.y-maxheight)*2, 90, 90);
 		g.drawArc(left.x, maxheight, right.x-left.x, (right.y-maxheight)*2, 0, 90);
 		
+		
+		AffineTransform tempTrans = ((Graphics2D) g).getTransform();
+		((Graphics2D) g).setStroke(new BasicStroke(relation.connectionWidth*5/6));
+		//Drawing arrows
+		double yt = 25;
+		if (rightIndex == relation.toFlower)
+		{
+			//Drawing arrows on the right
+
+			//Calculating the angle from the triangle
+			//Obtaining local linarization of the oval	
+			double xt =  (right.x-left.x)*Math.sqrt(1- Math.pow((yt/((right.y-maxheight)*2)), 2));
+			double xtt = (right.x-left.x)-xt;
+			double hypo = Point.distance(xtt, yt, 0, 0);
+			double theta = Math.acos((yt)/hypo);
+
+			g.translate(right.x, right.y);
+			((Graphics2D) g).rotate(-Math.PI/2-theta);			
+		}
+		else
+		{
+			//Calculating the angle from the triangle
+			//Obtaining local linarization of the oval	
+			double xt =  (right.x-left.x)*Math.sqrt(1- Math.pow((yt/((left.y-maxheight)*2)), 2));
+			double xtt = (right.x-left.x)-xt;
+			double hypo = Point.distance(xtt, yt, 0, 0);
+			double theta = Math.acos((yt)/hypo);
+
+			g.translate(left.x, left.y);
+			((Graphics2D) g).rotate(-Math.PI/2+theta);
+		}
+		g.drawLine(0, 0, 12, 5);
+		g.drawLine(0, 0, 12, -5);
+		((Graphics2D) g).setTransform(tempTrans);
 	}
-	
+
 	
 	public void drawScale(Graphics g){
 		//Check for scale not set
