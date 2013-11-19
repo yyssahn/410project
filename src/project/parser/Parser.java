@@ -21,6 +21,7 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
@@ -49,6 +50,7 @@ public class Parser {
 		cu.accept(new ASTVisitor(){
 			
 			public boolean visit(ClassInstanceCreation node){
+				cobj.addInvokedClass(node.getType().toString());
 				return true;	
 			}
 			public boolean visit(PackageDeclaration node){
@@ -68,13 +70,14 @@ public class Parser {
 				return true;
 			}
 			public boolean visit(MethodInvocation node){
-				System.out.println(cobj.getClassName());
-				System.out.println(node.getName().toString());
-//				MethodObject mobj = new MethodObject();
-//				mobj.setName(node.getName().toString());
-//				
-//				mobj.setStartLine(cu.getLineNumber(node.getStartPosition()));
-//				cobj.addInvocation(mobj);
+				Expression exp = node.getExpression();
+				String str;
+				if(exp != null){
+					str = exp.toString();
+					if(Character.isUpperCase(str.charAt(0)))
+						cobj.addInvokedClass(str);
+				}
+				
 				return true;
 			}
 		});
@@ -94,7 +97,10 @@ public class Parser {
 	            iterateFiles(file.listFiles()); // Calls same method again.
 	        } else {
 	        	String filepath = file.getAbsolutePath();
+	        	String[] temp = filepath.split("\\\\");
+	        	String[] simpleName = temp[temp.length - 1].split("\\.");
 	        	cobj = new ClassObject();
+	        	cobj.setSimpleName(simpleName[0]);
 	        	cobj.setClassName(filepath);
 	        	parse(readFileToString(filepath));
 	        	classes.add(cobj);
@@ -120,23 +126,7 @@ public class Parser {
 		return  fileData.toString();	
 	}
 	
-	// To do
-	public int[][] findrelation(ArrayList<ClassObject> clist){
-		int[][] relation = new int[clist.size()][clist.size()];
-		
-		return relation;
-	}
-	
-	public static void printClasses(){
-		for(ClassObject c : classes){
-			System.out.println(c.getClassName());
-			System.out.println("  " + c.getNumberOfLines());
-			for(String s : c.getImports())
-				System.out.println("  " + s);
-			for(MethodObject m : c.getMethods()){
-				System.out.println("  " + m.getName());
-				System.out.println("    " + m.getNumberOfLines());
-			}
-		}
+	public static ArrayList<ClassObject> getClasses(){
+		return classes;
 	}
 }

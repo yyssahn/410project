@@ -6,13 +6,16 @@ public class ClassObject {
 
 	private ArrayList<String> imports;
 	private ArrayList<MethodObject> methods;
+	private ArrayList<String> invokedClasses;
 	private int numberOfLines;
 	private String className;
+	private String simpleName;
 	private String packageName;
 	
 	public ClassObject(){
 		imports = new ArrayList<String>();
 		methods = new ArrayList<MethodObject>();
+		invokedClasses = new ArrayList<String>();
 	}
 	public ClassObject(ArrayList<String> imports, ArrayList<MethodObject> methods, int numberOfLines, String className){
 		this.imports = imports;
@@ -33,11 +36,17 @@ public class ClassObject {
 	public ArrayList<String> getImports() {
 		return imports;
 	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
 	public String getClassName() {
 		return className;
 	}
-	public void setClassName(String className) {
-		this.className = className;
+	public void setSimpleName(String name){
+		this.simpleName = name;
+	}
+	public String getSimpleName(){
+		return simpleName;
 	}
 	public void addMethod(MethodObject mobj){
 		this.methods.add(mobj);
@@ -45,14 +54,12 @@ public class ClassObject {
 	public ArrayList<MethodObject> getMethods() {
 		return methods;
 	}
-//	public void addInvocation(MethodObject mobj){
-//		for (MethodObject m : this.methods){
-//			if (m.getStartNumber()<= mobj.getStartNumber() && mobj.getStartNumber()<=m.getEndNumber()){
-//				m.addInvocation(mobj);
-//			}
-//			
-//		}
-//	}
+	public void addInvokedClass(String className){
+		this.invokedClasses.add(className);
+	}
+	public ArrayList<String> getInvokedClasses(){
+		return invokedClasses;
+	}
 	public void setNumberOfLines(int numberOfLines) {
 		this.numberOfLines = numberOfLines;
 	}
