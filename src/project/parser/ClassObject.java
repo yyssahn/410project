@@ -7,6 +7,7 @@ public class ClassObject {
 	private ArrayList<String> imports;
 	private ArrayList<MethodObject> methods;
 	private ArrayList<String> invokedClasses;
+	private ArrayList<String> invokedMethod;
 	private int numberOfLines;
 	private String className;
 	private String simpleName;
@@ -16,6 +17,7 @@ public class ClassObject {
 		imports = new ArrayList<String>();
 		methods = new ArrayList<MethodObject>();
 		invokedClasses = new ArrayList<String>();
+		invokedMethod = new ArrayList<String>();
 	}
 	public ClassObject(ArrayList<String> imports, ArrayList<MethodObject> methods, int numberOfLines, String className){
 		this.imports = imports;
@@ -56,6 +58,12 @@ public class ClassObject {
 	}
 	public void addInvokedClass(String className){
 		this.invokedClasses.add(className);
+	}
+	public void addInvokedMethod(String methodName){
+		this.invokedMethod.add(methodName);
+	}
+	public ArrayList<String> getInvokedMethod(){
+		return this.invokedMethod;
 	}
 	public ArrayList<String> getInvokedClasses(){
 		return invokedClasses;

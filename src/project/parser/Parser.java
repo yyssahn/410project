@@ -70,13 +70,14 @@ public class Parser {
 				return true;
 			}
 			public boolean visit(MethodInvocation node){
-				Expression exp = node.getExpression();
-				String str;
-				if(exp != null){
-					str = exp.toString();
-					if(Character.isUpperCase(str.charAt(0)))
-						cobj.addInvokedClass(str);
-				}
+			//	Expression exp = node.getExpression();
+			//	String str;
+				//if(exp != null){
+				//	str = exp.toString();
+			//		if(Character.isUpperCase(str.charAt(0)))
+		//				cobj.addInvokedClass(str);
+						cobj.addInvokedMethod(node.getName().toString());
+		//		}
 				
 				return true;
 			}
@@ -129,4 +130,66 @@ public class Parser {
 	public static ArrayList<ClassObject> getClasses(){
 		return classes;
 	}
+	
+	// returns relatios in a metrics form
+	// n
+	
+	public static int[][] findrelation(ArrayList<ClassObject> clist){
+		int[][] returnrelation = new int[clist.size()][clist.size()];
+		int k,h;
+		System.out.println("why wont this work");
+		// puts zeroes in relation metrics
+		for (k = 0 ; k<clist.size(); k++){
+			for (h = 0 ; h < clist.size(); h++){
+				returnrelation[k][h]= 0;
+			}
+		
+			
+		}
+		
+		//fill in metrics
+		int i;
+		
+		for (i=0; i < clist.size(); i++){
+		
+			ClassObject cobj = clist.get(i);
+			calculaterelation(clist, cobj, returnrelation, i);
+				
+				
+			}
+		
+		
+		return returnrelation;
+	}
+	public static void calculaterelation(ArrayList<ClassObject> clist, ClassObject cobj, int[][] metrics, int i){
+		int j;
+		for (String s:cobj.getInvokedClasses()){
+		
+			for (j=0; j<clist.size();j++){
+		
+				if (s.equalsIgnoreCase(clist.get(j).getSimpleName())){
+					getNumberOfRelation(metrics, cobj, clist.get(j), i, j);
+				}
+				
+			}	
+			
+		}
+		
+	}
+	
+	public static void getNumberOfRelation(int[][] metrics, ClassObject cobj1, ClassObject cobj2, int i, int j){
+		
+		for (String s: cobj1.getInvokedMethod()){
+			
+			for (MethodObject m: cobj2.getMethods()){
+				
+				if (s.equalsIgnoreCase(m.getName())){
+					metrics[i][j]++;
+					
+				}
+			}
+			
+		}
+	}
+	
 }
