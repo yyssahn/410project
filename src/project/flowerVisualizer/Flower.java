@@ -13,6 +13,9 @@ public class Flower extends FlowerComponent{
 	private int coreRadius;
 	private int petalRadius;
 	
+	private float scaleFactor = 1;
+
+
 	private boolean hasLeaves;
 	private int numberOfRoots; //= 6;
 	
@@ -138,6 +141,18 @@ public class Flower extends FlowerComponent{
 	}
 
 
+	public float getScaleFactor() {
+		return scaleFactor;
+	}
+
+
+	//TODO: Curvature of the stem, root size, leaf size
+	public void setScaleFactor(float scaleFactor) {
+		coreRadius *= scaleFactor;
+		petalRadius *= scaleFactor;
+		this.scaleFactor *= scaleFactor;
+	}
+	
 	@Override
 	public ArrayList<Flower> getFlowerList() {
 		ArrayList<Flower> toReturn = new ArrayList<Flower>();
@@ -145,10 +160,9 @@ public class Flower extends FlowerComponent{
 		return toReturn;
 	}
 
-
 	@Override
 	public FlowerUIComponent makeUIWrap() {
 		return new FlowerUI().wrapAround(this);
 	}
-	
+		
 }

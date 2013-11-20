@@ -17,6 +17,7 @@ public class FlowerPanel extends Canvas {
 	private int offset = 0;
 	private int miny = 10;
 	//TODO: explain that
+	//TODO: add this to the interface.
 	private int relationArcCoefficient = 40;
 	private ArrayList<FlowerUIComponent> components = new ArrayList<FlowerUIComponent>();
 	private ArrayList<FlowerUI> flowers;

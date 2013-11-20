@@ -53,17 +53,21 @@ public class FlowerUI extends FlowerUIComponent{
 		//this.setSize(totalWidth, totalHeight);
 		
 		//Need to change the size of a stroke
-		((Graphics2D) g).setStroke(new BasicStroke(7));
+		int stemWidth = Math.max(5, (int) (10*flowerData.getScaleFactor()));
+		((Graphics2D) g).setStroke(new BasicStroke(stemWidth));
 		
 		//Stem
 		g.setColor(new Color(39, 174, 96));
-		g.drawArc(width/2-20, width/2, 40, width/2+flowerData.getStemHeight(), 270, 170);
+		g.drawArc(width/2-(int)(20*flowerData.getScaleFactor()), width/2, (int) (40*flowerData.getScaleFactor()), 
+				width/2+flowerData.getStemHeight(), 270, 170);
 
 		//Leaves
 		if (flowerData.hasLeaves())
 		{
-			g.fillArc(width/2+16, width+flowerData.getStemHeight()/10, 80, 40, 45, 180);
-			g.fillArc(width/2+16-73, width+flowerData.getStemHeight()/4, 80, 40, -45, 180);
+			g.fillArc(width/2+(int)(16*flowerData.getScaleFactor()), width+flowerData.getStemHeight()/10, 
+					(int) (flowerData.getScaleFactor()*80), (int) (flowerData.getScaleFactor()*40), 45, 180);
+			g.fillArc(width/2+(int)(16*flowerData.getScaleFactor())-((int) (flowerData.getScaleFactor()*73)), width+flowerData.getStemHeight()/4, 
+					(int) (flowerData.getScaleFactor()*80), (int) (flowerData.getScaleFactor()*40), -45, 180);
 		}
 		
 		//Head
@@ -115,16 +119,16 @@ public class FlowerUI extends FlowerUIComponent{
 			y[0] = yzero;
 			for (int k = 0; k < 2 * nImports; k = k + 2) {
 				double alpha = Math.PI / 2 / nImports + k / 2 * Math.PI/ nImports;
-				x[k + 1] = xzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) 
+				x[k + 1] = xzero + (int) ((rootSize - Math.random() * 10 + 5) 
 								* Math.cos(alpha));
-				y[k + 1] = yzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) 
+				y[k + 1] = yzero + (int) ((rootSize - Math.random() * 10 + 5) 
 								* Math.sin(alpha));
 			}
 			for (int k = 2; k < 2 * nImports; k = k + 2) {
 				double alpha = k / 2 * Math.PI / nImports;
-				x[k] = xzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 
+				x[k] = xzero + (int) ((rootSize - Math.random() * 10 + 5) / 2.2 
 						* Math.cos(alpha));
-				y[k] = yzero + (int) ((DEFAULTROOTSIZE - Math.random() * 10 + 5) / 2.2 
+				y[k] = yzero + (int) ((rootSize - Math.random() * 10 + 5) / 2.2 
 						* Math.sin(alpha));
 			}
 			g.fillPolygon(x, y, 2 * nImports);
@@ -150,7 +154,7 @@ public class FlowerUI extends FlowerUIComponent{
 	public void init() {
 		int totalRadius = flowerData.getCoreRadius() + flowerData.getPetalRadius();
 		width = 2*totalRadius;
-		rootSize = (flowerData.hasRoots() ? 1 : 0) * DEFAULTROOTSIZE;
+		rootSize = (int) (flowerData.getScaleFactor() * (flowerData.hasRoots() ? 1 : 0) * DEFAULTROOTSIZE);
 		height = width + flowerData.getStemHeight() + rootSize;
 	}
 
