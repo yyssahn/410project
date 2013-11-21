@@ -12,6 +12,18 @@ public class MainTest {
 				"code/TreeFinder/server/TreeServiceImpl.java", 
 				"code/TreeFinder/server/imagedao.java", 
 				"code/TreeFinder/server/PMF.java", 
+				"code/TreeFinder/server/XMLParser.java", 
+				"code/TreeFinder/server/TreeServiceImpl.java", 
+				"code/TreeFinder/server/imagedao.java", 
+				"code/TreeFinder/server/PMF.java", 
+				"code/TreeFinder/server/XMLParser.java", 
+				"code/TreeFinder/server/TreeServiceImpl.java", 
+				"code/TreeFinder/server/imagedao.java", 
+				"code/TreeFinder/server/PMF.java", 
+				"code/TreeFinder/server/XMLParser.java", 
+				"code/TreeFinder/server/TreeServiceImpl.java", 
+				"code/TreeFinder/server/imagedao.java", 
+				"code/TreeFinder/server/PMF.java", 
 				"code/TreeFinder/server/XMLParser.java"};
 		Parser.main(fileList);
 	}

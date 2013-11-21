@@ -34,7 +34,6 @@ public interface FlowerVisualizer {
 	public void drawFlowers(ArrayList<Flower> flowerList, int width, int height);
 	
 	
-	//TODO: Agree on the standard window size
 	/**
 	 * An entry point to the Visualizer which draws the flowers on the window of standard size (640x480). 
 	 * @param flowerList - the list of flowers to draw.
