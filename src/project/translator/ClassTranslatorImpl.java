@@ -41,7 +41,7 @@ public class ClassTranslatorImpl implements ClassTranslator{
 			if(scaleFactor < 0.25){
 				hasLeaves = false;
 			}
-			String className = classes.get(i).getClassName();
+			String className = classes.get(i).getSimpleName();
 //			System.out.println(stemHeight + " | " +  numberOfPetals + " | " + coreSize + " | " +  petalRadius + " | " +  numberOfRoots + " | " +  hasLeaves + " | " + className);
 			Flower newFlower = new Flower(0, 0, stemHeight, numberOfPetals, coreSize, petalRadius, numberOfRoots, hasLeaves, className);
 			newFlower.setScaleFactor(scaleFactor * 1.2f);
