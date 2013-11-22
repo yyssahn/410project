@@ -11,17 +11,17 @@ public class ParserTest {
 	private static ArrayList<ClassObject> classes;
 	private static Parser parser;
 	public static void main(String[] args) throws Exception {
-		Parser.parseFilesInDir("code");
+		Parser.parseFilesInDir("src");
 		classes = Parser.getClasses();
-//		printClasses();
-		testrelation();
+		printClasses();
+//		testrelation();
 	}
 	
 	public static void printClasses(){
 		for(ClassObject c : classes){
 			System.out.println(c.getClassName());
 //			System.out.println(c.getSimpleName());
-//			System.out.println("  " + c.getNumberOfLines());
+			System.out.println("  " + c.getNumberOfLines());
 			for(String s: c.getInvokedClasses())
 				System.out.println("invoked classes : " + s);
 			for(String s : c.getImports())
@@ -36,7 +36,7 @@ public class ParserTest {
 				System.out.println("simple imports : "+ s);
 		};
 	}
-	
+/*	
 	public static void testrelation(){
 		int[][] relation = new int[classes.size()][classes.size()];
 		System.out.println("\n  Testing relation \n\n");
@@ -52,4 +52,5 @@ public class ParserTest {
 		
 		
 	}
+	*/
 }

@@ -10,7 +10,7 @@ public class ClassTranslatorImpl implements ClassTranslator{
 	final int MINSTEMHEIGHT = 0;
 	final int MINRADIUS = 5;
 	@Override
-	public void translateClass(ArrayList<ClassObject> classes) {
+	public void translateClass(ArrayList<ClassObject> classes, int[][] relationships) {
 		
 		ArrayList<Flower> flowerList = new ArrayList<Flower>();
 		int topStemHeight = 0;
@@ -20,6 +20,7 @@ public class ClassTranslatorImpl implements ClassTranslator{
 				topStemHeight = classes.get(i).getNumberOfLines();
 			}
 		}
+		System.out.println(topStemHeight);
 
 		float stemHeightFactor = MAXSTEMHEIGHT / topStemHeight;
 		
@@ -41,16 +42,26 @@ public class ClassTranslatorImpl implements ClassTranslator{
 				hasLeaves = false;
 			}
 			String className = classes.get(i).getClassName();
-						
+//			System.out.println(stemHeight + " | " +  numberOfPetals + " | " + coreSize + " | " +  petalRadius + " | " +  numberOfRoots + " | " +  hasLeaves + " | " + className);
 			Flower newFlower = new Flower(0, 0, stemHeight, numberOfPetals, coreSize, petalRadius, numberOfRoots, hasLeaves, className);
 			newFlower.setScaleFactor(scaleFactor * 1.2f);
 			flowerList.add(newFlower);
 		}
 		
-		ArrayList<FlowerRelation> relationList = new ArrayList<FlowerRelation>();
+		ArrayList<FlowerRelation> relationList = translateRelationships(relationships);
 		FlowerVisualizer visualization = new FlowerVisualizerImpl();
 		visualization.drawFlowers(flowerList, java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width, java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height, relationList);
 		visualization.requestScale(40, 80, (int) MAXSTEMHEIGHT, Integer.toString((int) topStemHeight/2), Integer.toString(topStemHeight));
+	}
+	
+	public ArrayList<FlowerRelation> translateRelationships(int[][] relationships){
+		ArrayList<FlowerRelation> relationList = new ArrayList<FlowerRelation>();
+//		for(int i = 0; i < relationships.length; i++){
+//			for(int j = 0; j < relationships[i].length; j++){
+//				relationList.add(new FlowerRelation(i, j, relationships[i][j]));
+//			}
+//		}
+		return relationList;
 	}
 
 }

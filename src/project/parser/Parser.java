@@ -47,6 +47,7 @@ public class Parser {
 		parser.setSource(str.toCharArray());
 		parser.setKind(ASTParser.K_COMPILATION_UNIT);
 		cu = (CompilationUnit) parser.createAST(null);
+		cobj.setNumberOfLines(cu.getLineNumber(cu.getLength()));
 		cu.accept(new ASTVisitor(){
 			
 			public boolean visit(ClassInstanceCreation node){
@@ -84,6 +85,8 @@ public class Parser {
 				return true;
 			}
 		});
+		
+		
 	}
 	
 	//input with string dirpath
@@ -94,13 +97,20 @@ public class Parser {
 		iterateFiles(files);
 	}
 	
+	public static void parseCodebase(String str) throws IOException{
+		parseFilesInDir(str);
+		int[][] relationships = findrelation(classes);
+		ClassTranslator translator = new ClassTranslatorImpl();
+		translator.translateClass(classes, relationships);
+	}
+	
 	public static void iterateFiles(File[] files) throws IOException{
 	    for (File file : files) {
 	        if (file.isDirectory()) {
 	            iterateFiles(file.listFiles()); // Calls same method again.
 	        } else {
 	        	String filepath = file.getAbsolutePath();
-	        	String[] temp = filepath.split("\\\\");
+	        	String[] temp = filepath.split("/");
 	        	String[] simpleName = temp[temp.length - 1].split("\\.");
 	        	cobj = new ClassObject();
 	        	cobj.setSimpleName(simpleName[0]);
@@ -149,8 +159,8 @@ public class Parser {
 			ArrayList<String> invokedClasses = clist.get(i).getInvokedClasses();
 			for(String s : invokedClasses){
 				for(int j=0; j<clist.size(); j++){
-					System.out.println(clist.get(i).getSimpleName() + "\n");
-					System.out.println(s);
+//					System.out.println(clist.get(i).getSimpleName() + "\n");
+//					System.out.println(s);
 					if(s.equals(clist.get(j).getSimpleName()))
 						returnrelation[i][j]++;
 				}

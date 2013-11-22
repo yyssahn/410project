@@ -98,8 +98,15 @@ public class TranslatorTest {
 			classes.add(new ClassObject(imports, methods, 10000, "fake.java"));
 		}
 		
+		int[][] relationships = null;
+//		for(int i = 0; i < 5; i++){
+//			
+//		}
+//		imports.add("test1");
+//		imports.add("test2");
+//		
 		ClassTranslator test = new ClassTranslatorImpl();
-		test.translateClass(classes);
+		test.translateClass(classes, relationships);
 		
 	}
 
