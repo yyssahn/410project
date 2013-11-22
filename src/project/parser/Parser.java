@@ -108,7 +108,7 @@ public class Parser {
 	    for (File file : files) {
 	        if (file.isDirectory()) {
 	            iterateFiles(file.listFiles()); // Calls same method again.
-	        } else {
+	        } else if (file.getName().endsWith(".java")){
 	        	String filepath = file.getAbsolutePath();
 	        	String[] temp = filepath.split("/");
 	        	String[] simpleName = temp[temp.length - 1].split("\\.");
