@@ -59,6 +59,9 @@ public class Parser {
 			}
 			public boolean visit(ImportDeclaration node){
 				cobj.addImports(node.getName().toString());
+		       	String[] temp = node.getName().toString().split("\\\\");
+	        	String[] simpleimport = temp[temp.length - 1].split("\\.");
+	        	cobj.addSimpleImport(simpleimport[0]);
 				return true;
 			}
 			public boolean visit(MethodDeclaration node){
@@ -137,16 +140,11 @@ public class Parser {
 	public static int[][] findrelation(ArrayList<ClassObject> clist){
 		int[][] returnrelation = new int[clist.size()][clist.size()];
 		int k,h;
-		System.out.println("why wont this work");
 		// puts zeroes in relation metrics
 		for (k = 0 ; k<clist.size(); k++){
-			for (h = 0 ; h < clist.size(); h++){
-				returnrelation[k][h]= 0;
-			}
-		
-			
-		}
-		
+			for (h = 0 ; h < clist.size(); h++)
+				returnrelation[k][h]= 0;		
+		}		
 		//fill in metrics
 		int i;
 		
