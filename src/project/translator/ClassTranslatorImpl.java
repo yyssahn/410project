@@ -1,5 +1,7 @@
 package project.translator;
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 import project.parser.*;
 import project.flowerVisualizer.*;
@@ -12,7 +14,6 @@ public class ClassTranslatorImpl implements ClassTranslator{
 	@Override
 	public void translateClass(ArrayList<ClassObject> classes, int[][] relationships) {
 		
-		ArrayList<Flower> flowerList = new ArrayList<Flower>();
 		int topStemHeight = 0;
 		
 		for(int i = 0; i < classes.size(); i++){
@@ -20,19 +21,34 @@ public class ClassTranslatorImpl implements ClassTranslator{
 				topStemHeight = classes.get(i).getNumberOfLines();
 			}
 		}
-		System.out.println(topStemHeight);
 
 		float stemHeightFactor = MAXSTEMHEIGHT / topStemHeight;
 		
+//		ArrayList<Flower> flowerList = new ArrayList<Flower>();
+		ArrayList<FlowerComposite> packageList = new ArrayList<FlowerComposite>();
+		int packageNumber = 0;
+		
 		for(int i = 0; i < classes.size(); i++){
+			String packageName = classes.get(i).getPackage();
+			
+			if((packageList.size() == 0) || (packageName != packageList.get(packageList.size()-1).getName())){
+				packageList.add(new FlowerComposite());
+				packageList.get(packageList.size()-1).setName(packageName);
+				
+				Random rand = new Random();
+				
+				float r = rand.nextFloat();
+				float g = rand.nextFloat();
+				float b = rand.nextFloat();
+				
+				packageList.get(packageList.size()-1).setPrimaryColor(new Color(r, g, b));
+			}
+			
 			float scaleFactor = (float) classes.get(i).getNumberOfLines() / (float) topStemHeight;
 			
 			int stemHeight = Math.max(MINSTEMHEIGHT, (int) (classes.get(i).getNumberOfLines() * stemHeightFactor));
 			int numberOfPetals = classes.get(i).getMethods().size();
-			
-//			int coreSize = (int) Math.max(MINRADIUS, (50 * scaleFactor));
-//			int petalRadius = (int) Math.max(MINRADIUS, (50 * scaleFactor));
-			
+						
 			int coreSize = 50;
 			int petalRadius = 50;
 			
@@ -41,16 +57,18 @@ public class ClassTranslatorImpl implements ClassTranslator{
 			if(scaleFactor < 0.25){
 				hasLeaves = false;
 			}
-			String className = classes.get(i).getClassName();
-//			System.out.println(stemHeight + " | " +  numberOfPetals + " | " + coreSize + " | " +  petalRadius + " | " +  numberOfRoots + " | " +  hasLeaves + " | " + className);
+			String className = classes.get(i).getSimpleName();
 			Flower newFlower = new Flower(0, 0, stemHeight, numberOfPetals, coreSize, petalRadius, numberOfRoots, hasLeaves, className);
 			newFlower.setScaleFactor(scaleFactor * 1.2f);
-			flowerList.add(newFlower);
+			packageList.get(packageList.size()-1).add(newFlower);
 		}
 		
 		ArrayList<FlowerRelation> relationList = translateRelationships(relationships);
+		
 		FlowerVisualizer visualization = new FlowerVisualizerImpl();
-		visualization.drawFlowers(flowerList, java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width, java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height, relationList);
+//		for(int i = 0; i < packageList.size(); i++){
+			visualization.drawFlowers(packageList.get(0), java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width, java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height, relationList);
+//		}
 		visualization.requestScale(40, 80, (int) MAXSTEMHEIGHT, Integer.toString((int) topStemHeight/2), Integer.toString(topStemHeight));
 	}
 	
