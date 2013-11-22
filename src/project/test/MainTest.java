@@ -7,9 +7,6 @@ import project.parser.MethodObject;
 import project.parser.Parser;
 
 public class MainTest {
-
-//	public static Frame frameOne;
-
 	public static void main(String[] args) throws Exception {		
 		Parser.parseCodebase("src");
 	}

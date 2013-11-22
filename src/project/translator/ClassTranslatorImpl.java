@@ -56,11 +56,13 @@ public class ClassTranslatorImpl implements ClassTranslator{
 	
 	public ArrayList<FlowerRelation> translateRelationships(int[][] relationships){
 		ArrayList<FlowerRelation> relationList = new ArrayList<FlowerRelation>();
-//		for(int i = 0; i < relationships.length; i++){
-//			for(int j = 0; j < relationships[i].length; j++){
-//				relationList.add(new FlowerRelation(i, j, relationships[i][j]));
-//			}
-//		}
+		for(int i = 0; i < relationships.length; i++){
+			for(int j = 0; j < relationships[i].length; j++){
+				if(relationships[i][j] != 0){
+					relationList.add(new FlowerRelation(i, j, relationships[i][j]));
+				}
+			}
+		}
 		return relationList;
 	}
 
