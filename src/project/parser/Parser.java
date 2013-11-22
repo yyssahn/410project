@@ -47,7 +47,7 @@ public class Parser {
 		parser.setSource(str.toCharArray());
 		parser.setKind(ASTParser.K_COMPILATION_UNIT);
 		cu = (CompilationUnit) parser.createAST(null);
-		cobj.setNumberOfLines(cu.getLineNumber(cu.getLength()));
+		cobj.setNumberOfLines(cu.getLineNumber(str.length()-1));
 		cu.accept(new ASTVisitor(){
 			
 			public boolean visit(ClassInstanceCreation node){
