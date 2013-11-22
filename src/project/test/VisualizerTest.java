@@ -20,7 +20,7 @@ public class VisualizerTest {
 		Flower myFirstFlower = new Flower(0, 400, 200, 10, 50, 50, 6, true, "Flower.java");
 		Flower mySecondFlower = new Flower(0, 400, 100, 10, 25, 25, 15, true, "BlahblahblahFlower.java");
 		myFirstFlower.setnumberOfRoots(6);
-		mySecondFlower.setScaleFactor(2);
+		myFirstFlower.setScaleFactor(0.5f);
 		
 		ArrayList<Flower> toPass = new ArrayList<Flower>();
 		toPass.add(myFirstFlower);

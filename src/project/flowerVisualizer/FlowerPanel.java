@@ -19,10 +19,11 @@ public class FlowerPanel extends Canvas {
 	//TODO: explain that
 	//TODO: add this to the interface.
 	private int relationArcCoefficient = 40;
+	
+
 	private ArrayList<FlowerUIComponent> components = new ArrayList<FlowerUIComponent>();
 	private ArrayList<FlowerUI> flowers;
-	private ArrayList<FlowerRelation> relations; 
-	final private Color CONNECTIONCOLOR = new Color(243, 156, 18, 255);
+	private ArrayList<FlowerRelation> relations;
 	
 	private int scaleX, scaleY, scaleHeight;
 	private String scaleMiddleString, scaleUpperString;
@@ -111,7 +112,7 @@ public class FlowerPanel extends Canvas {
 			maxheight += relationArcCoefficient/4;
 		
 		((Graphics2D) g).setStroke(new BasicStroke(relation.connectionWidth));
-		g.setColor(CONNECTIONCOLOR);
+		g.setColor(relation.getPrimaryColor());
 		g.drawArc(left.x, maxheight, right.x-left.x, (left.y-maxheight)*2, 90, 90);
 		g.drawArc(left.x, maxheight, right.x-left.x, (right.y-maxheight)*2, 0, 90);
 		
@@ -168,5 +169,13 @@ public class FlowerPanel extends Canvas {
 	
 	public void add(FlowerUIComponent toAdd){
 		components.add(toAdd);
+	}
+	
+	public int getRelationArcCoefficient() {
+		return relationArcCoefficient;
+	}
+
+	public void setRelationArcCoefficient(int relationArcCoefficient) {
+		this.relationArcCoefficient = relationArcCoefficient;
 	}
 }
