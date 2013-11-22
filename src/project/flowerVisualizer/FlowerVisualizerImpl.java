@@ -93,4 +93,14 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		if (myPanel!=null)
 			myPanel.prepareScale(x, y, height, middleText, upperText);
 	}
+	
+	/**
+	 * Changes how high the relation arrows are drawn.
+	 * @param height - the maximum height above the highest flower in the relation that the arc reaches for neighboring flowers; 
+	 * if there are k flowers in between, the the arc has (k + 1)*height instead.
+	 */
+	public void setRelationArcCoefficient(int height)
+	{
+		myPanel.setRelationArcCoefficient(height);
+	}
 }
