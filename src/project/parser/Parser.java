@@ -70,14 +70,13 @@ public class Parser {
 				return true;
 			}
 			public boolean visit(MethodInvocation node){
-			//	Expression exp = node.getExpression();
-			//	String str;
-				//if(exp != null){
-				//	str = exp.toString();
-			//		if(Character.isUpperCase(str.charAt(0)))
-		//				cobj.addInvokedClass(str);
-						cobj.addInvokedMethod(node.getName().toString());
-		//		}
+				Expression exp = node.getExpression();
+				String str;
+				if(exp != null){
+					str = exp.toString();
+					if(Character.isUpperCase(str.charAt(0)))
+						cobj.addInvokedClass(str);
+				}
 				
 				return true;
 			}
@@ -143,21 +142,20 @@ public class Parser {
 			for (h = 0 ; h < clist.size(); h++){
 				returnrelation[k][h]= 0;
 			}
-		
-			
 		}
 		
 		//fill in metrics
-		int i;
-		
-		for (i=0; i < clist.size(); i++){
-		
-			ClassObject cobj = clist.get(i);
-			calculaterelation(clist, cobj, returnrelation, i);
-				
-				
+		for (int i=0; i<clist.size(); i++){
+			ArrayList<String> invokedClasses = clist.get(i).getInvokedClasses();
+			for(String s : invokedClasses){
+				for(int j=0; j<clist.size(); j++){
+					System.out.println(clist.get(i).getSimpleName() + "\n");
+					System.out.println(s);
+					if(s.equals(clist.get(j).getSimpleName()))
+						returnrelation[i][j]++;
+				}
 			}
-		
+		}
 		
 		return returnrelation;
 	}
