@@ -110,7 +110,13 @@ public class Parser {
 	            iterateFiles(file.listFiles()); // Calls same method again.
 	        } else if (file.getName().endsWith(".java")){
 	        	String filepath = file.getAbsolutePath();
-	        	String[] temp = filepath.split("/");
+	        	String[] temp;
+	        	if(System.getProperty("os.name").startsWith("Windows")){
+	        		temp = filepath.split("\\\\");
+	        	}
+	        	else{
+		        	temp = filepath.split("/");
+	        	}
 	        	String[] simpleName = temp[temp.length - 1].split("\\.");
 	        	cobj = new ClassObject();
 	        	cobj.setSimpleName(simpleName[0]);
