@@ -6,8 +6,6 @@ public class MethodObject {
 
 	private String name;
 	private int numberOfLines;
-	private int startline;
-	private int endline;
 	private ArrayList<MethodObject> invocations;
 	
 	public MethodObject(){

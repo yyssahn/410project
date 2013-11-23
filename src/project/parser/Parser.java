@@ -1,10 +1,8 @@
 package project.parser;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.io.FileReader;
 
 import java.io.BufferedReader;
@@ -16,25 +14,13 @@ import org.eclipse.jdt.core.dom.ClassInstanceCreation;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.ClassInstanceCreation;
-import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.PackageDeclaration;
-import org.eclipse.jdt.core.dom.SimpleName;
-import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
-
 
 import project.translator.ClassTranslator;
 import project.translator.ClassTranslatorImpl;
-import japa.parser.JavaParser;
-import japa.parser.ast.expr.MethodCallExpr;
-import japa.parser.ast.visitor.VoidVisitorAdapter;
 
 public class Parser {
 	private static ArrayList<ClassObject> classes;
@@ -111,12 +97,10 @@ public class Parser {
 	        } else if (file.getName().endsWith(".java")){
 	        	String filepath = file.getAbsolutePath();
 	        	String[] temp;
-	        	if(System.getProperty("os.name").startsWith("Windows")){
+	        	if(System.getProperty("os.name").startsWith("Windows"))
 	        		temp = filepath.split("\\\\");
-	        	}
-	        	else{
+	        	else
 		        	temp = filepath.split("/");
-	        	}
 	        	String[] simpleName = temp[temp.length - 1].split("\\.");
 	        	cobj = new ClassObject();
 	        	cobj.setSimpleName(simpleName[0]);
@@ -149,9 +133,8 @@ public class Parser {
 		return classes;
 	}
 	
-	// returns relatios in a metrics form
+	// returns relations in a metrics form
 	// n
-	
 	public static int[][] findrelation(ArrayList<ClassObject> clist){
 		int[][] returnrelation = new int[clist.size()][clist.size()];
 		int k,h;
@@ -165,8 +148,6 @@ public class Parser {
 			ArrayList<String> invokedClasses = clist.get(i).getInvokedClasses();
 			for(String s : invokedClasses){
 				for(int j=0; j<clist.size(); j++){
-//					System.out.println(clist.get(i).getSimpleName() + "\n");
-//					System.out.println(s);
 					if(s.equals(clist.get(j).getSimpleName()))
 						returnrelation[i][j]++;
 				}
@@ -175,35 +156,4 @@ public class Parser {
 		
 		return returnrelation;
 	}
-	public static void calculaterelation(ArrayList<ClassObject> clist, ClassObject cobj, int[][] metrics, int i){
-		int j;
-		for (String s:cobj.getInvokedClasses()){
-		
-			for (j=0; j<clist.size();j++){
-		
-				if (s.equalsIgnoreCase(clist.get(j).getSimpleName())){
-					getNumberOfRelation(metrics, cobj, clist.get(j), i, j);
-				}
-				
-			}	
-			
-		}
-		
-	}
-	
-	public static void getNumberOfRelation(int[][] metrics, ClassObject cobj1, ClassObject cobj2, int i, int j){
-		
-		for (String s: cobj1.getInvokedMethod()){
-			
-			for (MethodObject m: cobj2.getMethods()){
-				
-				if (s.equalsIgnoreCase(m.getName())){
-					metrics[i][j]++;
-					
-				}
-			}
-			
-		}
-	}
-	
 }
