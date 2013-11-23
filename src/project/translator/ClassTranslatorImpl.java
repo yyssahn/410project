@@ -91,6 +91,12 @@ public class ClassTranslatorImpl implements ClassTranslator{
 			for(int j = 0; j < relationships[i].length; j++){
 				if(relationships[i][j] != 0){
 					relationList.add(new FlowerRelation(i, j, relationships[i][j]));
+					if(i > j){
+						relationList.get(relationList.size()-1).setPrimaryColor(new Color(0.0f, 0.0f, 1.0f));
+					}
+					else{
+						relationList.get(relationList.size()-1).setPrimaryColor(new Color(1.0f, 0.0f, 0.0f));
+					}
 				}
 			}
 		}
