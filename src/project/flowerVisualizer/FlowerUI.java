@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class FlowerUI extends FlowerUIComponent{
 	private Flower flowerData;
-	private final int DEFAULTROOTSIZE = 60;
+	public static final int DEFAULTROOTSIZE = 60;
 	private int rootSize;
 	public Point connectionCenter = new Point();
 	Font f = new Font("Monospaced", Font.BOLD, 12);
@@ -109,6 +109,7 @@ public class FlowerUI extends FlowerUIComponent{
 		
 		//Roots
 
+
 		if (flowerData.hasRoots()) 
 			if (flowerData.getNumberOfRoots() > 1)
 			{
@@ -117,7 +118,7 @@ public class FlowerUI extends FlowerUIComponent{
 				int[] x = new int[2 * nImports];
 				int[] y = new int[2 * nImports];
 				int xzero = width / 2;
-				int yzero = height - rootSize - 3;
+				int yzero = height - DEFAULTROOTSIZE - 3;
 				x[0] = xzero;
 				y[0] = yzero;
 				for (int k = 0; k < 2 * nImports; k = k + 2) {
@@ -173,6 +174,7 @@ public class FlowerUI extends FlowerUIComponent{
 		int totalRadius = flowerData.getCoreRadius() + flowerData.getPetalRadius();
 		width = 2*totalRadius;
 		rootSize = (int) (flowerData.getScaleFactor() * (flowerData.hasRoots() ? 1 : 0) * DEFAULTROOTSIZE);
+		//To align the flowers by roots, DEFAULTROOTSIZE is used as a measure.
 		height = width + flowerData.getStemHeight() + DEFAULTROOTSIZE;
 	}
 
