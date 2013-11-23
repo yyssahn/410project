@@ -18,9 +18,8 @@ public class VisualizerTestPackage {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Flower myFirstFlower = new Flower(0, 400, 200, 10, 50, 50, 6, true, "Flower.java");
-		Flower mySecondFlower = new Flower(0, 400, 100, 10, 25, 25, 15, true, "BlahblahblahFlower.java");
-		myFirstFlower.setnumberOfRoots(6);
+		Flower myFirstFlower = new Flower(0, 400, 200, 10, 50, 50, 1, true, "Flower.java");
+		Flower mySecondFlower = new Flower(0, 400, 100, 10, 25, 25, 1, true, "BlahblahblahFlower.java");
 		
 		FlowerComposite one = new FlowerComposite();
 		one.add(myFirstFlower);

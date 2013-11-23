@@ -2,7 +2,6 @@ package project.flowerVisualizer;
 
 import java.awt.BasicStroke;
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -78,6 +77,10 @@ public class FlowerPanel extends Canvas {
 		
 		//this.setPreferredSize(new Dimension(flowersWidth, 200));
 		
+		g.setColor(Palette.SUN_FLOWER);
+		int sunsize = 300;
+		g.fillOval(-sunsize/2, -sunsize/2, sunsize, sunsize);
+		
 		offset = Math.max((getWidth() - flowersWidth)/2, 5);
 						
 		for (FlowerUIComponent current: components)
@@ -92,6 +95,8 @@ public class FlowerPanel extends Canvas {
 			drawRelation(current, g);
 		
 		drawScale(g);
+		
+		
 		
 		g.dispose();
 		g.finalize();

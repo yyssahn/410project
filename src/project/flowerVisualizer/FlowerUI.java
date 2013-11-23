@@ -108,31 +108,49 @@ public class FlowerUI extends FlowerUIComponent{
 		//g.fillArc(0, 0, 100, 50, 45, 180);
 		
 		//Roots
-		if (flowerData.hasRoots()) {
-			g.setColor(new Color(241, 196, 15));
-			int nImports = flowerData.getNumberOfRoots();
-			int[] x = new int[2 * nImports];
-			int[] y = new int[2 * nImports];
-			int xzero = width / 2;
-			int yzero = height - DEFAULTROOTSIZE - 3;
-			x[0] = xzero;
-			y[0] = yzero;
-			for (int k = 0; k < 2 * nImports; k = k + 2) {
-				double alpha = Math.PI / 2 / nImports + k / 2 * Math.PI/ nImports;
-				x[k + 1] = xzero + (int) ((rootSize - Math.random() * 10 + 5) 
-								* Math.cos(alpha));
-				y[k + 1] = yzero + (int) ((rootSize - Math.random() * 10 + 5) 
-								* Math.sin(alpha));
+
+		if (flowerData.hasRoots()) 
+			if (flowerData.getNumberOfRoots() > 1)
+			{
+				g.setColor(new Color(241, 196, 15));
+				int nImports = flowerData.getNumberOfRoots();
+				int[] x = new int[2 * nImports];
+				int[] y = new int[2 * nImports];
+				int xzero = width / 2;
+				int yzero = height - rootSize - 3;
+				x[0] = xzero;
+				y[0] = yzero;
+				for (int k = 0; k < 2 * nImports; k = k + 2) {
+					double alpha = Math.PI / 2 / nImports + k / 2 * Math.PI/ nImports;
+					x[k + 1] = xzero + (int) ((rootSize - Math.random() * 10 + 5) 
+							* Math.cos(alpha));
+					y[k + 1] = yzero + (int) ((rootSize - Math.random() * 10 + 5) 
+							* Math.sin(alpha));
+				}
+				for (int k = 2; k < 2 * nImports; k = k + 2) {
+					double alpha = k / 2 * Math.PI / nImports;
+					x[k] = xzero + (int) ((rootSize - Math.random() * 10 + 5) / 2.2 
+							* Math.cos(alpha));
+					y[k] = yzero + (int) ((rootSize - Math.random() * 10 + 5) / 2.2 
+							* Math.sin(alpha));
+				}
+				g.fillPolygon(x, y, 2 * nImports);
 			}
-			for (int k = 2; k < 2 * nImports; k = k + 2) {
-				double alpha = k / 2 * Math.PI / nImports;
-				x[k] = xzero + (int) ((rootSize - Math.random() * 10 + 5) / 2.2 
-						* Math.cos(alpha));
-				y[k] = yzero + (int) ((rootSize - Math.random() * 10 + 5) / 2.2 
-						* Math.sin(alpha));
+			else {
+				g.setColor(new Color(241, 196, 15));
+
+				int[] x = new int[3];
+				int[] y = new int[3];
+
+				x[0] = (int) (width / 2 - 10*flowerData.getScaleFactor());
+				y[0] = height - DEFAULTROOTSIZE - 3;
+				x[1] = (int) (width / 2 + 10*flowerData.getScaleFactor());
+				y[1] = height - DEFAULTROOTSIZE - 3;
+				x[2] = (int) (width / 2 - Math.random() * 10 + 5);
+				y[2] = (int) (height - DEFAULTROOTSIZE - 3 + rootSize - Math.random() * 10 + 5);
+
+				g.fillPolygon(x, y, 3);
 			}
-			g.fillPolygon(x, y, 2 * nImports);
-		}
 		
 		//TODO: Deal with long Strings?
 		//Printing the class name

@@ -15,10 +15,10 @@ public class VideoExample {
 		FlowerComposite left = new FlowerComposite();
 		left.setName("left.");
 		left.setPrimaryColor(Palette.setTransparency(Palette.PETER_RIVER, 100));
-		for (int i = 0; i<10; i++)
+		for (int i = 0; i<5; i++)
 			left.add(new Flower(0, 0, 25, 5, 5, 5, 2, true, "Tiny.java"));
 		left.add(new Flower(0, 0, 400, 100, 50, 50, 500, true, "ElGiganto.java"));
-		for (int i = 0; i<10; i++)
+		for (int i = 0; i<5; i++)
 			left.add(new Flower(0, 0, 25, 5, 5, 5, 2, true, "Tiny.java"));
 		
 		
@@ -40,14 +40,14 @@ public class VideoExample {
 		ArrayList<FlowerRelation> relations = new ArrayList<FlowerRelation>();
 		
 		myFV.drawFlowers(big, 1200, 800, relations);
-		for (int i = 0; i<21; i++)
-			for (int j = i+1; j<21; j++)
+		for (int i = 0; i<11; i++)
+			for (int j = i+1; j<11; j++)
 				{
 				relations.add(new FlowerRelation(i, j, 1));
 				relations.add(new FlowerRelation(j, i, 1));
 				}
-		relations.add(new FlowerRelation(21,22,5));
-		relations.add(new FlowerRelation(22,23,5));
+		relations.add(new FlowerRelation(11,12,5));
+		relations.add(new FlowerRelation(12,13,5));
 		
 		myFV.requestScale(40, 60, 400+50, "300", "999 999 999");
 	}
