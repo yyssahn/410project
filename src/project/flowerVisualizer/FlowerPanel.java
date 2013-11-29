@@ -50,11 +50,9 @@ public class FlowerPanel extends Canvas {
 	public FlowerPanel() {
 		super();
 		//Scrolling functionality
-		this.addMouseWheelListener(new MouseWheelListener() {
-			
+		this.addMouseWheelListener(new MouseWheelListener() {		
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
-				System.out.print(e.getWheelRotation());
 				for (FlowerUI current:flowers)
 					if (e.getWheelRotation() < 0)
 						current.getFlowerData().setScaleFactor((float) (1+ 0.05*e.getWheelRotation()));
