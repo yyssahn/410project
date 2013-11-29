@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
@@ -15,8 +17,8 @@ public class FlowerPanel extends Canvas {
 	private int flowersHeight = 0;
 	private int offset = 0;
 	private int miny = 10;
-	//TODO: explain that
-	//TODO: add this to the interface.
+	
+	//How curvy is the arcs between the flowers.
 	private int relationArcCoefficient = 40;
 	
 
@@ -44,6 +46,25 @@ public class FlowerPanel extends Canvas {
 	}
 	
 	private static final long serialVersionUID = -4877282940745566348L;
+	
+	public FlowerPanel() {
+		super();
+		//Scrolling functionality
+		this.addMouseWheelListener(new MouseWheelListener() {
+			
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				System.out.print(e.getWheelRotation());
+				for (FlowerUI current:flowers)
+					if (e.getWheelRotation() < 0)
+						current.getFlowerData().setScaleFactor((float) (1+ 0.05*e.getWheelRotation()));
+					else
+						current.getFlowerData().setScaleFactor((float) (1+ 0.10*e.getWheelRotation()));
+				((FlowerPanel) e.getComponent()).init();
+				((FlowerPanel) e.getComponent()).repaint();
+			}
+		});
+	}
 	
 	/**Required to be executed after all the FlowerComponents are added.
 	 * Sets the sizes correctly.
@@ -73,10 +94,7 @@ public class FlowerPanel extends Canvas {
 	
 	
 	public void paint(Graphics g)
-	{
-		
-		//this.setPreferredSize(new Dimension(flowersWidth, 200));
-		
+	{		
 		g.setColor(Palette.SUN_FLOWER);
 		int sunsize = 300;
 		g.fillOval(-sunsize/2, -sunsize/2, sunsize, sunsize);
@@ -88,15 +106,12 @@ public class FlowerPanel extends Canvas {
 			current.paintReuseGraphics(g, offset, Math.max(getHeight()-current.getHeight(), miny));
 			offset+=current.getWidth();
 		}
-		
-		//g.drawArc(0, 0, 100, 100, 0, 180);
-		
-		for (FlowerRelation current: relations)
-			drawRelation(current, g);
+
+		if (relations!=null)
+			for (FlowerRelation current: relations)
+				drawRelation(current, g);
 		
 		drawScale(g);
-		
-		
 		
 		g.dispose();
 		g.finalize();

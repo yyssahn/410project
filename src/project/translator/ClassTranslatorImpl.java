@@ -82,7 +82,7 @@ public class ClassTranslatorImpl implements ClassTranslator{
 		FlowerVisualizer visualization = new FlowerVisualizerImpl();
 		visualization.drawFlowers(packages, java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().width, java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().height, relationList);
 		visualization.requestScale(40, 80, (int) MAXSTEMHEIGHT, Integer.toString((int) topStemHeight/2), Integer.toString(topStemHeight));
-		((FlowerVisualizerImpl) visualization).setRelationArcCoefficient(20);
+		((FlowerVisualizerImpl) visualization).setRelationArcCoefficient(10);
 	}
 	
 	public ArrayList<FlowerRelation> translateRelationships(int[][] relationships){

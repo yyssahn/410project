@@ -52,7 +52,6 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		else if (flowerList!=null)
 			for (Flower currentFlower : flowerList)
 				myPanel.add(currentFlower.makeUIWrap());
-
 		
 		myPanel.addRelations(relationList);
 		myPanel.init();
@@ -60,7 +59,7 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 
 		myScrollPane.add(myPanel);
 		mainWindowFrame.add(myScrollPane);
-
+		
 		mainWindowFrame.setVisible(true);	
 	}
 	
@@ -79,23 +78,13 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 	}
 	
 	@Override
-	public void drawFlowers(ArrayList<Flower> flowerList, int width, int height) {
-		drawFlowers(flowerList, width, height, new ArrayList<FlowerRelation>());
-	}
-
-	@Override
-	public void drawFlowers(ArrayList<Flower> flowerList) {
-		drawFlowers(flowerList, DEFAULT_WIDTH, DEFAULT_HEIGHT);		
-	}
-
-	@Override
 	public void requestScale(int x, int y, int height, String middleText, String upperText){
 		if (myPanel!=null)
 			myPanel.prepareScale(x, y, height, middleText, upperText);
 	}
 	
 	/**
-	 * Changes how high the relation arrows are drawn.
+	 * Changes how high the relation arrows are drawn - specific to this implementation.
 	 * @param height - the maximum height above the highest flower in the relation that the arc reaches for neighboring flowers; 
 	 * if there are k flowers in between, the the arc has (k + 1)*height instead.
 	 */

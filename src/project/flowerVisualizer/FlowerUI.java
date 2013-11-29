@@ -17,6 +17,11 @@ import java.util.ArrayList;
  */
 public class FlowerUI extends FlowerUIComponent{
 	private Flower flowerData;
+	public Flower getFlowerData() {
+		return flowerData;
+	}
+
+
 	public static final int DEFAULTROOTSIZE = 60;
 	private int rootSize;
 	public Point connectionCenter = new Point();
@@ -43,21 +48,21 @@ public class FlowerUI extends FlowerUIComponent{
 		g.translate(-x, -y);
 	}
 	
-	//Do not look here, I am a bit ashamed =(
+	//Sophisticated code for drawing Flowers
 	public void paint(Graphics g){
+		//Simple error check.
 		if (flowerData == null)
 		{	
 			System.out.println("Trying to draw an empty Flower");
 			return;
 		}
-		//this.setSize(totalWidth, totalHeight);
-		
-		//Need to change the size of a stroke
-		int stemWidth = Math.max(5, (int) (10*flowerData.getScaleFactor()));
-		((Graphics2D) g).setStroke(new BasicStroke(stemWidth));
+
 		
 		//Stem
-		g.setColor(new Color(39, 174, 96));
+			//Need to change the size of a stroke
+				int stemWidth = Math.max(3, (int) (10*flowerData.getScaleFactor()));
+				((Graphics2D) g).setStroke(new BasicStroke(stemWidth));
+		g.setColor(Palette.NEPHRITIS);
 		g.drawArc(width/2-(int)(20*flowerData.getScaleFactor()), width/2, (int) (40*flowerData.getScaleFactor()), 
 				width/2+flowerData.getStemHeight(), 270, 170);
 
@@ -72,7 +77,7 @@ public class FlowerUI extends FlowerUIComponent{
 		
 		//Head
 			//Petals
-				g.setColor(new Color(241, 196, 15));
+				g.setColor(Palette.SUN_FLOWER);
 				if (flowerData.getNumberOfPetals() == 1)
 				{
 					g.fillOval(0, 0, width-1, width-1);
@@ -98,8 +103,7 @@ public class FlowerUI extends FlowerUIComponent{
 					g.fillPolygon(x, y, 2 * n);					
 				}
 				
-			//Core
-		//g.setColor(new Color(231, 76, 60));
+		//Core
 		g.setColor(flowerData.getPrimaryColor());
 		g.fillOval(flowerData.getPetalRadius(), flowerData.getPetalRadius(), 
 				flowerData.getCoreRadius()*2,flowerData.getCoreRadius()*2);
@@ -108,12 +112,10 @@ public class FlowerUI extends FlowerUIComponent{
 		//g.fillArc(0, 0, 100, 50, 45, 180);
 		
 		//Roots
-
-
+		g.setColor(Palette.SUN_FLOWER);
 		if (flowerData.hasRoots()) 
 			if (flowerData.getNumberOfRoots() > 1)
-			{
-				g.setColor(new Color(241, 196, 15));
+			{	//Several roots - drawing a polygon.
 				int nImports = flowerData.getNumberOfRoots();
 				int[] x = new int[2 * nImports];
 				int[] y = new int[2 * nImports];
@@ -121,6 +123,7 @@ public class FlowerUI extends FlowerUIComponent{
 				int yzero = height - DEFAULTROOTSIZE - 3;
 				x[0] = xzero;
 				y[0] = yzero;
+				//Spiky parts of the root
 				for (int k = 0; k < 2 * nImports; k = k + 2) {
 					double alpha = Math.PI / 2 / nImports + k / 2 * Math.PI/ nImports;
 					x[k + 1] = xzero + (int) ((rootSize - Math.random() * 10 + 5) 
@@ -128,6 +131,7 @@ public class FlowerUI extends FlowerUIComponent{
 					y[k + 1] = yzero + (int) ((rootSize - Math.random() * 10 + 5) 
 							* Math.sin(alpha));
 				}
+				//Internal parts of the root
 				for (int k = 2; k < 2 * nImports; k = k + 2) {
 					double alpha = k / 2 * Math.PI / nImports;
 					x[k] = xzero + (int) ((rootSize - Math.random() * 10 + 5) / 2.2 
@@ -137,15 +141,13 @@ public class FlowerUI extends FlowerUIComponent{
 				}
 				g.fillPolygon(x, y, 2 * nImports);
 			}
-			else {
-				g.setColor(new Color(241, 196, 15));
-
+			else { //One root -> carrot-like triangle.
 				int[] x = new int[3];
 				int[] y = new int[3];
 
-				x[0] = (int) (width / 2 - 10*flowerData.getScaleFactor());
+				x[0] = (int) (width / 2 - Math.min(4,10*flowerData.getScaleFactor()));
 				y[0] = height - DEFAULTROOTSIZE - 3;
-				x[1] = (int) (width / 2 + 10*flowerData.getScaleFactor());
+				x[1] = (int) (width / 2 + Math.min(4,10*flowerData.getScaleFactor()));
 				y[1] = height - DEFAULTROOTSIZE - 3;
 				x[2] = (int) (width / 2 - Math.random() * 10 + 5);
 				y[2] = (int) (height - DEFAULTROOTSIZE - 3 + rootSize - Math.random() * 10 + 5);
