@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
@@ -15,8 +17,8 @@ public class FlowerPanel extends Canvas {
 	private int flowersHeight = 0;
 	private int offset = 0;
 	private int miny = 10;
-	//TODO: explain that
-	//TODO: add this to the interface.
+	
+	//How curvy is the arcs between the flowers.
 	private int relationArcCoefficient = 40;
 	
 
@@ -44,6 +46,29 @@ public class FlowerPanel extends Canvas {
 	}
 	
 	private static final long serialVersionUID = -4877282940745566348L;
+	
+	public FlowerPanel() {
+		super();
+		//Scrolling functionality
+		this.addMouseWheelListener(new MouseWheelListener() {		
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				double scalingFactor = 1 + 0.10*Math.abs(e.getWheelRotation());
+				//Reversing if it is a negative scaling
+				if (e.getWheelRotation() < 0)
+					scalingFactor = 1/scalingFactor;
+				
+				for (FlowerUI current:flowers)
+						current.getFlowerData().setScaleFactor((float) scalingFactor);
+					
+				//For the future - scaling of the height meter.
+				//((FlowerPanel) e.getComponent()).scaleHeight *= scalingFactor;
+				
+				((FlowerPanel) e.getComponent()).init();
+				((FlowerPanel) e.getComponent()).repaint();
+			}
+		});
+	}
 	
 	/**Required to be executed after all the FlowerComponents are added.
 	 * Sets the sizes correctly.
@@ -73,9 +98,10 @@ public class FlowerPanel extends Canvas {
 	
 	
 	public void paint(Graphics g)
-	{
-		
-		//this.setPreferredSize(new Dimension(flowersWidth, 200));
+	{		
+//		this.setBackground(Palette.CLOUDS);
+		g.setColor(Palette.CLOUDS);
+		g.fillRect(0, 0, this.getWidth()-1, this.getHeight()-1);
 		
 		g.setColor(Palette.SUN_FLOWER);
 		int sunsize = 300;
@@ -88,15 +114,12 @@ public class FlowerPanel extends Canvas {
 			current.paintReuseGraphics(g, offset, Math.max(getHeight()-current.getHeight(), miny));
 			offset+=current.getWidth();
 		}
-		
-		//g.drawArc(0, 0, 100, 100, 0, 180);
-		
-		for (FlowerRelation current: relations)
-			drawRelation(current, g);
+
+		if (relations!=null)
+			for (FlowerRelation current: relations)
+				drawRelation(current, g);
 		
 		drawScale(g);
-		
-		
 		
 		g.dispose();
 		g.finalize();
