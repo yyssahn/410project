@@ -39,7 +39,7 @@ public class ClassTranslatorImpl implements ClassTranslator{
 		
 		for(int i = 0; i < classes.size(); i++){
 //			String newPackageName = classes.get(i).getPackage().split("\\.")[1];
-			System.out.println(classes.get(i).getClassName());
+//			System.out.println(classes.get(i).getClassName());
 
 			String newPackageName = classes.get(i).getPackage().substring(classes.get(i).getPackage().lastIndexOf(".")+1,classes.get(i).getPackage().length());
 

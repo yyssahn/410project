@@ -53,11 +53,17 @@ public class FlowerPanel extends Canvas {
 		this.addMouseWheelListener(new MouseWheelListener() {		
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
+				double scalingFactor = 1 + 0.10*Math.abs(e.getWheelRotation());
+				//Reversing if it is a negative scaling
+				if (e.getWheelRotation() < 0)
+					scalingFactor = 1/scalingFactor;
+				
 				for (FlowerUI current:flowers)
-					if (e.getWheelRotation() < 0)
-						current.getFlowerData().setScaleFactor((float) (1+ 0.05*e.getWheelRotation()));
-					else
-						current.getFlowerData().setScaleFactor((float) (1+ 0.10*e.getWheelRotation()));
+						current.getFlowerData().setScaleFactor((float) scalingFactor);
+					
+				//For the future - scaling of the height meter.
+				//((FlowerPanel) e.getComponent()).scaleHeight *= scalingFactor;
+				
 				((FlowerPanel) e.getComponent()).init();
 				((FlowerPanel) e.getComponent()).repaint();
 			}
@@ -93,6 +99,10 @@ public class FlowerPanel extends Canvas {
 	
 	public void paint(Graphics g)
 	{		
+//		this.setBackground(Palette.CLOUDS);
+		g.setColor(Palette.CLOUDS);
+		g.fillRect(0, 0, this.getWidth()-1, this.getHeight()-1);
+		
 		g.setColor(Palette.SUN_FLOWER);
 		int sunsize = 300;
 		g.fillOval(-sunsize/2, -sunsize/2, sunsize, sunsize);

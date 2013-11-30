@@ -10,6 +10,11 @@ public class Flower extends FlowerComponent{
 	
 	private int stemHeight;
 	private int numberOfPetals;
+	
+	//Needed for proper scaling
+	private double trueCoreRadius;
+	private double truePetalRadius;
+	
 	private int coreRadius;
 	private int petalRadius;
 	
@@ -42,7 +47,9 @@ public class Flower extends FlowerComponent{
 		this.stemHeight = stemHeight;
 		this.numberOfPetals = numberOfPetals;
 		this.coreRadius = coreSize;
+		this.trueCoreRadius = coreSize;
 		this.petalRadius = petalRadius;
+		this.truePetalRadius = petalRadius;
 		this.numberOfRoots = numberOfRoots;
 		this.hasLeaves = hasLeaves;
 		this.name = className;
@@ -148,8 +155,10 @@ public class Flower extends FlowerComponent{
 
 	//TODO: Curvature of the stem, root size, leaf size
 	public void setScaleFactor(float scaleFactor) {
-		coreRadius *= scaleFactor;
-		petalRadius *= scaleFactor;
+		trueCoreRadius *= scaleFactor;
+		truePetalRadius *= scaleFactor;
+		coreRadius = (int) trueCoreRadius;
+		petalRadius = (int) truePetalRadius;
 		this.scaleFactor *= scaleFactor;
 	}
 	

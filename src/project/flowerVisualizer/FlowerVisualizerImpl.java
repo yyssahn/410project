@@ -17,6 +17,9 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 	final int DEFAULT_WIDTH = 640;
 	final int DEFAULT_HEIGHT = 480;
 	
+	//Total number of opened windows.
+	private static int windowsLeft = 0; 
+	
 	FlowerPanel myPanel;
 
 	//A helper method not to have duplicate code
@@ -28,25 +31,29 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		mainWindowFrame.setBackground(Palette.CLOUDS);
 		mainWindowFrame.add(new Label("Hallo"));
 		mainWindowFrame.setLayout(new BorderLayout());
+		
+		windowsLeft += 1;
 
 		mainWindowFrame.setTitle("It is Robotanism! Your code is filled with flowers~");
 		Image myIcon = Toolkit.getDefaultToolkit().getImage("assets/icon0.png");
 		mainWindowFrame.setIconImage(myIcon);
 		
-		//Need this to close the windows and the program
+		//Need this to close the windows and decrease the total number of windows opened.
 		mainWindowFrame.addWindowListener(new WindowAdapter(){
 			@Override
 			public void windowClosing(WindowEvent we)
 			{
-				System.exit(0);
+				FlowerVisualizerImpl.windowsLeft -= 1;
+				we.getComponent().setVisible(false);
+				if (FlowerVisualizerImpl.windowsLeft == 0)
+					System.exit(0);
 			}
 		});
 
-		ScrollPane myScrollPane = new ScrollPane();
-		myPanel = new FlowerPanel();
-
 		
-		//The only section of the code that type-dependent
+		myPanel = new FlowerPanel();
+		
+		//Adding Flowers
 		if (flowerTree!=null)
 			myPanel.add(flowerTree.makeUIWrap());
 		else if (flowerList!=null)
@@ -56,7 +63,7 @@ public class FlowerVisualizerImpl implements FlowerVisualizer{
 		myPanel.addRelations(relationList);
 		myPanel.init();
 
-
+		ScrollPane myScrollPane = new ScrollPane();
 		myScrollPane.add(myPanel);
 		mainWindowFrame.add(myScrollPane);
 		
